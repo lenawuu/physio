@@ -1,4 +1,3 @@
-# pt-app
+# PT-App
 
-blah blah blah
-test - lena
+A physical therapy routine app written in Dart.
