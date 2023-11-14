@@ -1,7 +1,3 @@
 # PT-App
 
-A new Flutter project.
-
-## Getting Started
-
-FlutterFlow projects are built to run on the Flutter _stable_ release.
+A physical therapy routine app written in Dart.
