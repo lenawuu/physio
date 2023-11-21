@@ -1,3 +1,4 @@
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -10,22 +11,10 @@ export 'time_period_sentence_model.dart';
 class TimePeriodSentenceWidget extends StatefulWidget {
   const TimePeriodSentenceWidget({
     super.key,
-    String? numberDays,
-    String? timesPerDay,
-    String? daysPerWeek,
-    String? numberSets,
-    String? numberReps,
-  })  : numberDays = numberDays ?? 'XXX',
-        timesPerDay = timesPerDay ?? 'XXX',
-        daysPerWeek = daysPerWeek ?? 'XXX',
-        numberSets = numberSets ?? 'XXX',
-        numberReps = numberReps ?? 'XXX';
+    required this.exercise,
+  });
 
-  final String numberDays;
-  final String timesPerDay;
-  final String daysPerWeek;
-  final String numberSets;
-  final String numberReps;
+  final dynamic exercise;
 
   @override
   _TimePeriodSentenceWidgetState createState() =>
@@ -42,20 +31,11 @@ class _TimePeriodSentenceWidgetState extends State<TimePeriodSentenceWidget> {
     super.initState();
     _model = createModel(context, () => TimePeriodSentenceModel());
 
-    _model.textController1 ??= TextEditingController();
-    _model.textFieldFocusNode1 ??= FocusNode();
+    _model.setsController ??= TextEditingController();
+    _model.setsFocusNode ??= FocusNode();
 
-    _model.textController2 ??= TextEditingController();
-    _model.textFieldFocusNode2 ??= FocusNode();
-
-    _model.textController3 ??= TextEditingController();
-    _model.textFieldFocusNode3 ??= FocusNode();
-
-    _model.textController4 ??= TextEditingController();
-    _model.textFieldFocusNode4 ??= FocusNode();
-
-    _model.textController5 ??= TextEditingController();
-    _model.textFieldFocusNode5 ??= FocusNode();
+    _model.repsController ??= TextEditingController();
+    _model.repsFocusNode ??= FocusNode();
   }
 
   @override
@@ -90,471 +70,275 @@ class _TimePeriodSentenceWidgetState extends State<TimePeriodSentenceWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(24.0, 100.0, 24.0, 0.0),
-                    child: Text(
-                      'I need to do this exercise for',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Plus Jakarta Sans',
-                            color: FlutterFlowTheme.of(context).primary,
-                            fontSize: 20.0,
-                            letterSpacing: 0.5,
-                            fontWeight: FontWeight.bold,
-                            lineHeight: 1.5,
-                          ),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Flexible(
-                    child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 8.0, 0.0),
-                      child: SizedBox(
-                        width: 48.0,
-                        child: TextFormField(
-                          controller: _model.textController1,
-                          focusNode: _model.textFieldFocusNode1,
-                          autofocus: true,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            isDense: true,
-                            labelText: 'Label here...',
-                            labelStyle:
-                                FlutterFlowTheme.of(context).labelMedium,
-                            hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0x6F4B986C),
-                                width: 7.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primary,
-                                width: 7.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            errorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 7.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            focusedErrorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 7.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                          ),
-                          style: FlutterFlowTheme.of(context).bodyMedium,
-                          textAlign: TextAlign.center,
-                          keyboardType: TextInputType.number,
-                          validator: _model.textController1Validator
-                              .asValidator(context),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Text(
-                    'days,',
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Plus Jakarta Sans',
-                          color: FlutterFlowTheme.of(context).primary,
-                          fontSize: 20.0,
-                          letterSpacing: 0.5,
-                          fontWeight: FontWeight.bold,
-                          lineHeight: 1.5,
-                        ),
-                  ),
-                  Flexible(
-                    child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
-                      child: SizedBox(
-                        width: 48.0,
-                        child: TextFormField(
-                          controller: _model.textController2,
-                          focusNode: _model.textFieldFocusNode2,
-                          autofocus: true,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            isDense: true,
-                            labelText: 'Label here...',
-                            labelStyle:
-                                FlutterFlowTheme.of(context).labelMedium,
-                            hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0x6F4B986C),
-                                width: 7.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primary,
-                                width: 7.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            errorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 7.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            focusedErrorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 7.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                          ),
-                          style: FlutterFlowTheme.of(context).bodyMedium,
-                          textAlign: TextAlign.center,
-                          keyboardType: TextInputType.number,
-                          validator: _model.textController2Validator
-                              .asValidator(context),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 24.0, 0.0),
-                    child: Text(
-                      'times per week,',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Plus Jakarta Sans',
-                            color: FlutterFlowTheme.of(context).primary,
-                            fontSize: 20.0,
-                            letterSpacing: 0.5,
-                            fontWeight: FontWeight.bold,
-                            lineHeight: 1.5,
-                          ),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Flexible(
-                    child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 8.0, 0.0),
-                      child: SizedBox(
-                        width: 48.0,
-                        child: TextFormField(
-                          controller: _model.textController3,
-                          focusNode: _model.textFieldFocusNode3,
-                          autofocus: true,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            isDense: true,
-                            labelText: 'Label here...',
-                            labelStyle:
-                                FlutterFlowTheme.of(context).labelMedium,
-                            hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0x6F4B986C),
-                                width: 7.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primary,
-                                width: 7.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            errorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 7.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            focusedErrorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 7.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                          ),
-                          style: FlutterFlowTheme.of(context).bodyMedium,
-                          textAlign: TextAlign.center,
-                          keyboardType: TextInputType.number,
-                          validator: _model.textController3Validator
-                              .asValidator(context),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 24.0, 0.0),
-                    child: Text(
-                      'days per week.',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Plus Jakarta Sans',
-                            color: FlutterFlowTheme.of(context).primary,
-                            fontSize: 20.0,
-                            letterSpacing: 0.5,
-                            fontWeight: FontWeight.bold,
-                            lineHeight: 1.5,
-                          ),
-                    ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 32.0, 0.0, 0.0),
-                child: Row(
+              Form(
+                key: _model.formKey,
+                autovalidateMode: AutovalidateMode.always,
+                child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                      child: Text(
-                        'Each time I do this exercise, ',
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Plus Jakarta Sans',
-                              color: FlutterFlowTheme.of(context).primary,
-                              fontSize: 20.0,
-                              letterSpacing: 0.5,
-                              fontWeight: FontWeight.bold,
-                              lineHeight: 1.5,
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 32.0, 0.0, 0.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                24.0, 0.0, 24.0, 0.0),
+                            child: Text(
+                              'Each time I do this exercise, ',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Plus Jakarta Sans',
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    fontSize: 20.0,
+                                    letterSpacing: 0.5,
+                                    fontWeight: FontWeight.bold,
+                                    lineHeight: 1.5,
+                                  ),
                             ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
-                    child: Text(
-                      'I need to do',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Plus Jakarta Sans',
-                            color: FlutterFlowTheme.of(context).primary,
-                            fontSize: 20.0,
-                            letterSpacing: 0.5,
-                            fontWeight: FontWeight.bold,
-                            lineHeight: 1.5,
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              24.0, 0.0, 0.0, 0.0),
+                          child: Text(
+                            'I need to do',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Plus Jakarta Sans',
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  fontSize: 20.0,
+                                  letterSpacing: 0.5,
+                                  fontWeight: FontWeight.bold,
+                                  lineHeight: 1.5,
+                                ),
                           ),
-                    ),
-                  ),
-                  Flexible(
-                    child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
-                      child: SizedBox(
-                        width: 48.0,
-                        child: TextFormField(
-                          controller: _model.textController4,
-                          focusNode: _model.textFieldFocusNode4,
-                          autofocus: true,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            isDense: true,
-                            labelText: 'Label here...',
-                            labelStyle:
-                                FlutterFlowTheme.of(context).labelMedium,
-                            hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0x6F4B986C),
-                                width: 7.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primary,
-                                width: 7.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            errorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 7.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            focusedErrorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 7.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                          ),
-                          style: FlutterFlowTheme.of(context).bodyMedium,
-                          textAlign: TextAlign.center,
-                          keyboardType: TextInputType.number,
-                          validator: _model.textController4Validator
-                              .asValidator(context),
                         ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 24.0, 0.0),
-                    child: Text(
-                      'sets',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Plus Jakarta Sans',
-                            color: FlutterFlowTheme.of(context).primary,
-                            fontSize: 20.0,
-                            letterSpacing: 0.5,
-                            fontWeight: FontWeight.bold,
-                            lineHeight: 1.5,
-                          ),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
-                    child: Text(
-                      'for',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Plus Jakarta Sans',
-                            color: FlutterFlowTheme.of(context).primary,
-                            fontSize: 20.0,
-                            letterSpacing: 0.5,
-                            fontWeight: FontWeight.bold,
-                            lineHeight: 1.5,
-                          ),
-                    ),
-                  ),
-                  Flexible(
-                    child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
-                      child: SizedBox(
-                        width: 48.0,
-                        child: TextFormField(
-                          controller: _model.textController5,
-                          focusNode: _model.textFieldFocusNode5,
-                          autofocus: true,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            isDense: true,
-                            labelText: 'Label here...',
-                            labelStyle:
-                                FlutterFlowTheme.of(context).labelMedium,
-                            hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0x6F4B986C),
-                                width: 7.0,
+                        Flexible(
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                8.0, 0.0, 8.0, 0.0),
+                            child: SizedBox(
+                              width: 48.0,
+                              child: TextFormField(
+                                controller: _model.setsController,
+                                focusNode: _model.setsFocusNode,
+                                onFieldSubmitted: (_) async {
+                                  setState(() {
+                                    _model.setsController?.text =
+                                        _model.setsController.text;
+                                  });
+                                },
+                                autofocus: true,
+                                textInputAction: TextInputAction.next,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  isDense: true,
+                                  labelText: 'Label here...',
+                                  labelStyle:
+                                      FlutterFlowTheme.of(context).labelMedium,
+                                  hintStyle:
+                                      FlutterFlowTheme.of(context).labelMedium,
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: Color(0x6F4B986C),
+                                      width: 7.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      width: 7.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  errorBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context).error,
+                                      width: 7.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  focusedErrorBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context).error,
+                                      width: 7.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                ),
+                                style: FlutterFlowTheme.of(context).bodyMedium,
+                                textAlign: TextAlign.center,
+                                keyboardType: TextInputType.number,
+                                validator: _model.setsControllerValidator
+                                    .asValidator(context),
                               ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primary,
-                                width: 7.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            errorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 7.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            focusedErrorBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 7.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
                             ),
                           ),
-                          style: FlutterFlowTheme.of(context).bodyMedium,
-                          textAlign: TextAlign.center,
-                          keyboardType: TextInputType.number,
-                          validator: _model.textController5Validator
-                              .asValidator(context),
                         ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 24.0, 0.0),
-                    child: Text(
-                      'reps.',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Plus Jakarta Sans',
-                            color: FlutterFlowTheme.of(context).primary,
-                            fontSize: 20.0,
-                            letterSpacing: 0.5,
-                            fontWeight: FontWeight.bold,
-                            lineHeight: 1.5,
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 24.0, 0.0),
+                          child: Text(
+                            'sets',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Plus Jakarta Sans',
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  fontSize: 20.0,
+                                  letterSpacing: 0.5,
+                                  fontWeight: FontWeight.bold,
+                                  lineHeight: 1.5,
+                                ),
                           ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
-              ),
-              Opacity(
-                opacity: 0.2,
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 70.0, 0.0, 0.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8.0),
-                    child: Image.network(
-                      'https://static.vecteezy.com/system/resources/previews/015/111/138/original/happy-young-woman-stretching-standing-and-raise-right-hand-feeling-joyful-and-optimistic-outline-thin-line-art-hand-drawn-sketch-design-simple-style-free-vector.jpg',
-                      width: 111.0,
-                      height: 200.0,
-                      fit: BoxFit.cover,
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              24.0, 0.0, 0.0, 0.0),
+                          child: Text(
+                            'for',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Plus Jakarta Sans',
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  fontSize: 20.0,
+                                  letterSpacing: 0.5,
+                                  fontWeight: FontWeight.bold,
+                                  lineHeight: 1.5,
+                                ),
+                          ),
+                        ),
+                        Flexible(
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                8.0, 0.0, 8.0, 0.0),
+                            child: SizedBox(
+                              width: 48.0,
+                              child: TextFormField(
+                                controller: _model.repsController,
+                                focusNode: _model.repsFocusNode,
+                                onFieldSubmitted: (_) async {
+                                  setState(() {
+                                    _model.repsController?.text =
+                                        _model.repsController.text;
+                                  });
+                                },
+                                autofocus: true,
+                                textInputAction: TextInputAction.done,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  isDense: true,
+                                  labelText: 'Label here...',
+                                  labelStyle:
+                                      FlutterFlowTheme.of(context).labelMedium,
+                                  hintStyle:
+                                      FlutterFlowTheme.of(context).labelMedium,
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: Color(0x6F4B986C),
+                                      width: 7.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      width: 7.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  errorBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context).error,
+                                      width: 7.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  focusedErrorBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context).error,
+                                      width: 7.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                ),
+                                style: FlutterFlowTheme.of(context).bodyMedium,
+                                textAlign: TextAlign.center,
+                                keyboardType: TextInputType.number,
+                                validator: _model.repsControllerValidator
+                                    .asValidator(context),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 24.0, 0.0),
+                          child: Text(
+                            'reps.',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Plus Jakarta Sans',
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  fontSize: 20.0,
+                                  letterSpacing: 0.5,
+                                  fontWeight: FontWeight.bold,
+                                  lineHeight: 1.5,
+                                ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
                     Padding(
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(64.0, 0.0, 64.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          context.pushNamed('SetReminders');
+                          setState(() {
+                            FFAppState().addToUserRoutine(RoutineItemStruct(
+                              sets: int.tryParse(_model.setsController.text),
+                              reps: int.tryParse(_model.repsController.text),
+                              exercise: IndividualExerciseStruct(
+                                title: getJsonField(
+                                  widget.exercise,
+                                  r'''$.Title''',
+                                ).toString(),
+                                directions: getJsonField(
+                                  widget.exercise,
+                                  r'''$.Directions''',
+                                ).toString(),
+                                imageLink: getJsonField(
+                                  widget.exercise,
+                                  r'''$.ImageLink''',
+                                ).toString(),
+                                videoLink: getJsonField(
+                                  widget.exercise,
+                                  r'''$.VideoLink''',
+                                ).toString(),
+                              ),
+                            ));
+                          });
+
+                          context.pushNamed('Routine');
                         },
                         text: 'Looks good to me!',
                         options: FFButtonOptions(

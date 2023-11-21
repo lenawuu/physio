@@ -81,26 +81,16 @@ class _RoutineItemWidgetState extends State<RoutineItemWidget> {
                       Padding(
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
-                        child: InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            context.pushNamed('IndividualExercise');
-                          },
-                          child: Text(
-                            'test Exercise Link',
-                            style: FlutterFlowTheme.of(context)
-                                .titleMedium
-                                .override(
-                                  fontFamily: 'SF Pro',
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  fontWeight: FontWeight.w600,
-                                  useGoogleFonts: false,
-                                ),
-                          ),
+                        child: Text(
+                          'test Exercise Link',
+                          style: FlutterFlowTheme.of(context)
+                              .titleMedium
+                              .override(
+                                fontFamily: 'SF Pro',
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                fontWeight: FontWeight.w600,
+                                useGoogleFonts: false,
+                              ),
                         ),
                       ),
                       Text(

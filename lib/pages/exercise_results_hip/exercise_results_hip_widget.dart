@@ -57,7 +57,7 @@ class _ExerciseResultsHipWidgetState extends State<ExerciseResultsHipWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(24.0, 64.0, 24.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -168,7 +168,10 @@ class _ExerciseResultsHipWidgetState extends State<ExerciseResultsHipWidget> {
                                             borderRadius:
                                                 BorderRadius.circular(8.0),
                                             child: Image.network(
-                                              hipResultsItem.imageURL,
+                                              getJsonField(
+                                                hipResultsItem,
+                                                r'''$.ImageLink''',
+                                              ),
                                               width: 300.0,
                                               height: 200.0,
                                               fit: BoxFit.cover,
@@ -187,11 +190,15 @@ class _ExerciseResultsHipWidgetState extends State<ExerciseResultsHipWidget> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               AutoSizeText(
-                                                hipResultsItem.title
+                                                getJsonField(
+                                                  hipResultsItem,
+                                                  r'''$.Title''',
+                                                )
+                                                    .toString()
                                                     .maybeHandleOverflow(
-                                                  maxChars: 19,
-                                                  replacement: '…',
-                                                ),
+                                                      maxChars: 19,
+                                                      replacement: '…',
+                                                    ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyLarge
@@ -210,11 +217,15 @@ class _ExerciseResultsHipWidgetState extends State<ExerciseResultsHipWidget> {
                                                     .fromSTEB(
                                                         0.0, 4.0, 0.0, 0.0),
                                                 child: Text(
-                                                  hipResultsItem.directions
+                                                  getJsonField(
+                                                    hipResultsItem,
+                                                    r'''$.Directions''',
+                                                  )
+                                                      .toString()
                                                       .maybeHandleOverflow(
-                                                    maxChars: 60,
-                                                    replacement: '…',
-                                                  ),
+                                                        maxChars: 60,
+                                                        replacement: '…',
+                                                      ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .labelSmall
@@ -241,17 +252,9 @@ class _ExerciseResultsHipWidgetState extends State<ExerciseResultsHipWidget> {
                                           context.pushNamed(
                                             'IndividualExercise',
                                             queryParameters: {
-                                              'exerciseName': serializeParam(
-                                                hipResultsItem.title,
-                                                ParamType.String,
-                                              ),
-                                              'videoURL': serializeParam(
-                                                hipResultsItem.videoURL,
-                                                ParamType.String,
-                                              ),
-                                              'directions': serializeParam(
-                                                hipResultsItem.directions,
-                                                ParamType.String,
+                                              'exerciseJSON': serializeParam(
+                                                hipResultsItem,
+                                                ParamType.JSON,
                                               ),
                                             }.withoutNulls,
                                           );

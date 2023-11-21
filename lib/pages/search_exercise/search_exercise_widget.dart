@@ -233,8 +233,8 @@ class _SearchExerciseWidgetState extends State<SearchExerciseWidget> {
                           ),
                         ),
                         FFButtonWidget(
-                          onPressed: () async {
-                            context.pushNamed('ExerciseResultsShoulder');
+                          onPressed: () {
+                            print('Button pressed ...');
                           },
                           text: 'Shoulder',
                           options: FFButtonOptions(

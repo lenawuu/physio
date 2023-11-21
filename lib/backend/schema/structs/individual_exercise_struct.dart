@@ -11,18 +11,18 @@ class IndividualExerciseStruct extends BaseStruct {
     String? directions,
     List<String>? musclesInvolved,
     List<String>? relatedConditions,
-    String? videoURL,
-    String? imageURL,
+    String? imageLink,
     String? url,
     List<String>? muscleGroup,
+    String? videoLink,
   })  : _title = title,
         _directions = directions,
         _musclesInvolved = musclesInvolved,
         _relatedConditions = relatedConditions,
-        _videoURL = videoURL,
-        _imageURL = imageURL,
+        _imageLink = imageLink,
         _url = url,
-        _muscleGroup = muscleGroup;
+        _muscleGroup = muscleGroup,
+        _videoLink = videoLink;
 
   // "Title" field.
   String? _title;
@@ -52,17 +52,11 @@ class IndividualExerciseStruct extends BaseStruct {
       updateFn(_relatedConditions ??= []);
   bool hasRelatedConditions() => _relatedConditions != null;
 
-  // "videoURL" field.
-  String? _videoURL;
-  String get videoURL => _videoURL ?? '';
-  set videoURL(String? val) => _videoURL = val;
-  bool hasVideoURL() => _videoURL != null;
-
-  // "imageURL" field.
-  String? _imageURL;
-  String get imageURL => _imageURL ?? '';
-  set imageURL(String? val) => _imageURL = val;
-  bool hasImageURL() => _imageURL != null;
+  // "imageLink" field.
+  String? _imageLink;
+  String get imageLink => _imageLink ?? '';
+  set imageLink(String? val) => _imageLink = val;
+  bool hasImageLink() => _imageLink != null;
 
   // "URL" field.
   String? _url;
@@ -78,16 +72,22 @@ class IndividualExerciseStruct extends BaseStruct {
       updateFn(_muscleGroup ??= []);
   bool hasMuscleGroup() => _muscleGroup != null;
 
+  // "VideoLink" field.
+  String? _videoLink;
+  String get videoLink => _videoLink ?? '';
+  set videoLink(String? val) => _videoLink = val;
+  bool hasVideoLink() => _videoLink != null;
+
   static IndividualExerciseStruct fromMap(Map<String, dynamic> data) =>
       IndividualExerciseStruct(
         title: data['Title'] as String?,
         directions: data['Directions'] as String?,
         musclesInvolved: getDataList(data['MusclesInvolved']),
         relatedConditions: getDataList(data['RelatedConditions']),
-        videoURL: data['videoURL'] as String?,
-        imageURL: data['imageURL'] as String?,
+        imageLink: data['imageLink'] as String?,
         url: data['URL'] as String?,
         muscleGroup: getDataList(data['MuscleGroup']),
+        videoLink: data['VideoLink'] as String?,
       );
 
   static IndividualExerciseStruct? maybeFromMap(dynamic data) =>
@@ -100,10 +100,10 @@ class IndividualExerciseStruct extends BaseStruct {
         'Directions': _directions,
         'MusclesInvolved': _musclesInvolved,
         'RelatedConditions': _relatedConditions,
-        'videoURL': _videoURL,
-        'imageURL': _imageURL,
+        'imageLink': _imageLink,
         'URL': _url,
         'MuscleGroup': _muscleGroup,
+        'VideoLink': _videoLink,
       }.withoutNulls;
 
   @override
@@ -126,12 +126,8 @@ class IndividualExerciseStruct extends BaseStruct {
           ParamType.String,
           true,
         ),
-        'videoURL': serializeParam(
-          _videoURL,
-          ParamType.String,
-        ),
-        'imageURL': serializeParam(
-          _imageURL,
+        'imageLink': serializeParam(
+          _imageLink,
           ParamType.String,
         ),
         'URL': serializeParam(
@@ -142,6 +138,10 @@ class IndividualExerciseStruct extends BaseStruct {
           _muscleGroup,
           ParamType.String,
           true,
+        ),
+        'VideoLink': serializeParam(
+          _videoLink,
+          ParamType.String,
         ),
       }.withoutNulls;
 
@@ -168,13 +168,8 @@ class IndividualExerciseStruct extends BaseStruct {
           ParamType.String,
           true,
         ),
-        videoURL: deserializeParam(
-          data['videoURL'],
-          ParamType.String,
-          false,
-        ),
-        imageURL: deserializeParam(
-          data['imageURL'],
+        imageLink: deserializeParam(
+          data['imageLink'],
           ParamType.String,
           false,
         ),
@@ -187,6 +182,11 @@ class IndividualExerciseStruct extends BaseStruct {
           data['MuscleGroup'],
           ParamType.String,
           true,
+        ),
+        videoLink: deserializeParam(
+          data['VideoLink'],
+          ParamType.String,
+          false,
         ),
       );
 
@@ -201,10 +201,10 @@ class IndividualExerciseStruct extends BaseStruct {
         directions == other.directions &&
         listEquality.equals(musclesInvolved, other.musclesInvolved) &&
         listEquality.equals(relatedConditions, other.relatedConditions) &&
-        videoURL == other.videoURL &&
-        imageURL == other.imageURL &&
+        imageLink == other.imageLink &&
         url == other.url &&
-        listEquality.equals(muscleGroup, other.muscleGroup);
+        listEquality.equals(muscleGroup, other.muscleGroup) &&
+        videoLink == other.videoLink;
   }
 
   @override
@@ -213,24 +213,24 @@ class IndividualExerciseStruct extends BaseStruct {
         directions,
         musclesInvolved,
         relatedConditions,
-        videoURL,
-        imageURL,
+        imageLink,
         url,
-        muscleGroup
+        muscleGroup,
+        videoLink
       ]);
 }
 
 IndividualExerciseStruct createIndividualExerciseStruct({
   String? title,
   String? directions,
-  String? videoURL,
-  String? imageURL,
+  String? imageLink,
   String? url,
+  String? videoLink,
 }) =>
     IndividualExerciseStruct(
       title: title,
       directions: directions,
-      videoURL: videoURL,
-      imageURL: imageURL,
+      imageLink: imageLink,
       url: url,
+      videoLink: videoLink,
     );

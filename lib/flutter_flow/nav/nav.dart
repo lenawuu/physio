@@ -51,11 +51,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'TimePeriodSentence',
           path: '/timePeriodSentence',
           builder: (context, params) => TimePeriodSentenceWidget(
-            numberDays: params.getParam('numberDays', ParamType.String),
-            timesPerDay: params.getParam('timesPerDay', ParamType.String),
-            daysPerWeek: params.getParam('daysPerWeek', ParamType.String),
-            numberSets: params.getParam('numberSets', ParamType.String),
-            numberReps: params.getParam('numberReps', ParamType.String),
+            exercise: params.getParam('exercise', ParamType.JSON),
           ),
         ),
         FFRoute(
@@ -67,41 +63,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'IndividualExercise',
           path: '/individualExercise',
           builder: (context, params) => IndividualExerciseWidget(
-            exerciseName: params.getParam('exerciseName', ParamType.String),
-            videoURL: params.getParam('videoURL', ParamType.String),
-            directions: params.getParam('directions', ParamType.String),
+            exerciseJSON: params.getParam('exerciseJSON', ParamType.JSON),
           ),
-        ),
-        FFRoute(
-          name: 'IndividualExerciseCopy',
-          path: '/individualExerciseCopy',
-          builder: (context, params) => const IndividualExerciseCopyWidget(),
-        ),
-        FFRoute(
-          name: 'TimePeriodLine',
-          path: '/timePeriodLine',
-          builder: (context, params) => TimePeriodLineWidget(
-            numberDays: params.getParam('numberDays', ParamType.String),
-            timesPerDay: params.getParam('timesPerDay', ParamType.String),
-            daysPerWeek: params.getParam('daysPerWeek', ParamType.String),
-            numberSets: params.getParam('numberSets', ParamType.String),
-            numberReps: params.getParam('numberReps', ParamType.String),
-          ),
-        ),
-        FFRoute(
-          name: 'ExerciseResults',
-          path: '/exerciseResults',
-          builder: (context, params) => const ExerciseResultsWidget(),
         ),
         FFRoute(
           name: 'ExerciseResultsHip',
           path: '/exerciseResultsHip',
           builder: (context, params) => const ExerciseResultsHipWidget(),
-        ),
-        FFRoute(
-          name: 'ExerciseResultsShoulder',
-          path: '/exerciseResultsShoulder',
-          builder: (context, params) => const ExerciseResultsShoulderWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],
