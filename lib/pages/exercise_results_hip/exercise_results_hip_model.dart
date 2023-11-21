@@ -1,15 +1,12 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'add_exercise_widget.dart' show AddExerciseWidget;
+import 'exercise_results_hip_widget.dart' show ExerciseResultsHipWidget;
 import 'package:flutter/material.dart';
 
-class AddExerciseModel extends FlutterFlowModel<AddExerciseWidget> {
+class ExerciseResultsHipModel
+    extends FlutterFlowModel<ExerciseResultsHipWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode;
-  TextEditingController? textController;
-  String? Function(BuildContext, String?)? textControllerValidator;
 
   /// Initialization and disposal methods.
 
@@ -19,8 +16,6 @@ class AddExerciseModel extends FlutterFlowModel<AddExerciseWidget> {
   @override
   void dispose() {
     unfocusNode.dispose();
-    textFieldFocusNode?.dispose();
-    textController?.dispose();
   }
 
   /// Action blocks are added here.

@@ -1,9 +1,9 @@
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'set_reminders_model.dart';
 export 'set_reminders_model.dart';
 
@@ -43,6 +43,8 @@ class _SetRemindersWidgetState extends State<SetRemindersWidget> {
       );
     }
 
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -52,32 +54,10 @@ class _SetRemindersWidgetState extends State<SetRemindersWidget> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(20.0, 12.0, 20.0, 16.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  FlutterFlowIconButton(
-                    borderColor: FlutterFlowTheme.of(context).alternate,
-                    borderRadius: 30.0,
-                    borderWidth: 2.0,
-                    buttonSize: 44.0,
-                    icon: Icon(
-                      Icons.close_rounded,
-                      color: FlutterFlowTheme.of(context).secondaryText,
-                      size: 20.0,
-                    ),
-                    onPressed: () async {
-                      context.pop();
-                    },
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(20.0, 100.0, 20.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(24.0, 64.0, 24.0, 0.0),
               child: Text(
                 'Good job setting up your routine!',
+                textAlign: TextAlign.center,
                 style: FlutterFlowTheme.of(context).displaySmall.override(
                       fontFamily: 'SF Pro',
                       color: FlutterFlowTheme.of(context).primary,
@@ -88,10 +68,22 @@ class _SetRemindersWidgetState extends State<SetRemindersWidget> {
               ),
             ),
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.network(
+                  'https://static.vecteezy.com/system/resources/previews/015/111/138/original/happy-young-woman-stretching-standing-and-raise-right-hand-feeling-joyful-and-optimistic-outline-thin-line-art-hand-drawn-sketch-design-simple-style-free-vector.jpg',
+                  width: 111.0,
+                  height: 200.0,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(24.0, 20.0, 24.0, 0.0),
               child: Text(
                 'When do you want to receive reminders to do your exercises?',
-                textAlign: TextAlign.start,
+                textAlign: TextAlign.center,
                 style: FlutterFlowTheme.of(context).labelLarge.override(
                       fontFamily: 'Plus Jakarta Sans',
                       color: FlutterFlowTheme.of(context).primary,
@@ -103,64 +95,111 @@ class _SetRemindersWidgetState extends State<SetRemindersWidget> {
               ),
             ),
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(32.0, 20.0, 32.0, 0.0),
-              child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).primaryBackground,
-                  borderRadius: BorderRadius.circular(8.0),
-                  border: Border.all(
-                    color: FlutterFlowTheme.of(context).alternate,
-                    width: 2.0,
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+              child: FFButtonWidget(
+                onPressed: () async {
+                  final datePickedTime = await showTimePicker(
+                    context: context,
+                    initialTime: TimeOfDay.fromDateTime(getCurrentTimestamp),
+                    builder: (context, child) {
+                      return wrapInMaterialTimePickerTheme(
+                        context,
+                        child!,
+                        headerBackgroundColor:
+                            FlutterFlowTheme.of(context).primary,
+                        headerForegroundColor:
+                            FlutterFlowTheme.of(context).info,
+                        headerTextStyle:
+                            FlutterFlowTheme.of(context).headlineLarge.override(
+                                  fontFamily: 'SF Pro',
+                                  fontSize: 32.0,
+                                  fontWeight: FontWeight.w600,
+                                  useGoogleFonts: false,
+                                ),
+                        pickerBackgroundColor:
+                            FlutterFlowTheme.of(context).secondaryBackground,
+                        pickerForegroundColor:
+                            FlutterFlowTheme.of(context).primaryText,
+                        selectedDateTimeBackgroundColor:
+                            FlutterFlowTheme.of(context).primary,
+                        selectedDateTimeForegroundColor:
+                            FlutterFlowTheme.of(context).info,
+                        actionButtonForegroundColor:
+                            FlutterFlowTheme.of(context).primaryText,
+                        iconSize: 24.0,
+                      );
+                    },
+                  );
+                  if (datePickedTime != null) {
+                    safeSetState(() {
+                      _model.datePicked = DateTime(
+                        getCurrentTimestamp.year,
+                        getCurrentTimestamp.month,
+                        getCurrentTimestamp.day,
+                        datePickedTime.hour,
+                        datePickedTime.minute,
+                      );
+                    });
+                  }
+                },
+                text: valueOrDefault<String>(
+                  dateTimeFormat('jm', _model.datePicked),
+                  'Select a Time',
+                ),
+                options: FFButtonOptions(
+                  height: 40.0,
+                  padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                  iconPadding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                  color: Colors.white,
+                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                        fontFamily: 'Plus Jakarta Sans',
+                        color: FlutterFlowTheme.of(context).primary,
+                      ),
+                  elevation: 3.0,
+                  borderSide: BorderSide(
+                    color: FlutterFlowTheme.of(context).primary,
+                    width: 1.0,
                   ),
+                  borderRadius: BorderRadius.circular(30.0),
                 ),
               ),
             ),
-            Container(
-              width: 100.0,
-              height: 100.0,
-              decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).secondaryBackground,
-              ),
-            ),
-            Container(
-              width: 100.0,
-              height: 100.0,
-              decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).secondaryBackground,
-              ),
-            ),
             Expanded(
-              child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 32.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    FFButtonWidget(
-                      onPressed: () {
-                        print('Button pressed ...');
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(64.0, 0.0, 64.0, 0.0),
+                    child: FFButtonWidget(
+                      onPressed: () async {
+                        context.pushNamed('Routine');
                       },
-                      text: 'Go Home',
+                      text: 'Go to My Routine',
                       options: FFButtonOptions(
-                        width: 230.0,
-                        height: 50.0,
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        height: 40.0,
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            24.0, 0.0, 24.0, 0.0),
                         iconPadding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).alternate,
-                        textStyle: FlutterFlowTheme.of(context).bodyLarge,
-                        elevation: 0.0,
+                        color: FlutterFlowTheme.of(context).primary,
+                        textStyle:
+                            FlutterFlowTheme.of(context).titleSmall.override(
+                                  fontFamily: 'Plus Jakarta Sans',
+                                  color: Colors.white,
+                                ),
+                        elevation: 3.0,
                         borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 1.0,
                         ),
-                        borderRadius: BorderRadius.circular(40.0),
+                        borderRadius: BorderRadius.circular(30.0),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ],

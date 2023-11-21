@@ -1,11 +1,13 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'set_reminders_widget.dart' show SetRemindersWidget;
+import 'exercise_results_shoulder_widget.dart'
+    show ExerciseResultsShoulderWidget;
 import 'package:flutter/material.dart';
 
-class SetRemindersModel extends FlutterFlowModel<SetRemindersWidget> {
+class ExerciseResultsShoulderModel
+    extends FlutterFlowModel<ExerciseResultsShoulderWidget> {
   ///  State fields for stateful widgets in this page.
 
-  DateTime? datePicked;
+  final unfocusNode = FocusNode();
 
   /// Initialization and disposal methods.
 
@@ -13,7 +15,9 @@ class SetRemindersModel extends FlutterFlowModel<SetRemindersWidget> {
   void initState(BuildContext context) {}
 
   @override
-  void dispose() {}
+  void dispose() {
+    unfocusNode.dispose();
+  }
 
   /// Action blocks are added here.
 

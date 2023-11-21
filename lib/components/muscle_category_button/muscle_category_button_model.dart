@@ -1,12 +1,9 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'set_reminders_widget.dart' show SetRemindersWidget;
+import 'muscle_category_button_widget.dart' show MuscleCategoryButtonWidget;
 import 'package:flutter/material.dart';
 
-class SetRemindersModel extends FlutterFlowModel<SetRemindersWidget> {
-  ///  State fields for stateful widgets in this page.
-
-  DateTime? datePicked;
-
+class MuscleCategoryButtonModel
+    extends FlutterFlowModel<MuscleCategoryButtonWidget> {
   /// Initialization and disposal methods.
 
   @override

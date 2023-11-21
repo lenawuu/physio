@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+
 import '/index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
@@ -29,17 +30,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => const AddExerciseWidget(),
+      errorBuilder: (context, state) => const SearchExerciseWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => const AddExerciseWidget(),
+          builder: (context, _) => const SearchExerciseWidget(),
         ),
         FFRoute(
-          name: 'AddExercise',
-          path: '/addExercise',
-          builder: (context, params) => const AddExerciseWidget(),
+          name: 'SearchExercise',
+          path: '/searchExercise',
+          builder: (context, params) => const SearchExerciseWidget(),
         ),
         FFRoute(
           name: 'Routine',
@@ -47,16 +48,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const RoutineWidget(),
         ),
         FFRoute(
-          name: 'IndividualExercise',
-          path: '/individualExercise',
-          builder: (context, params) => IndividualExerciseWidget(
-            exerciseName: params.getParam('exerciseName', ParamType.String),
-          ),
-        ),
-        FFRoute(
-          name: 'TimePeriod',
-          path: '/timePeriod',
-          builder: (context, params) => TimePeriodWidget(
+          name: 'TimePeriodSentence',
+          path: '/timePeriodSentence',
+          builder: (context, params) => TimePeriodSentenceWidget(
             numberDays: params.getParam('numberDays', ParamType.String),
             timesPerDay: params.getParam('timesPerDay', ParamType.String),
             daysPerWeek: params.getParam('daysPerWeek', ParamType.String),
@@ -68,8 +62,49 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'SetReminders',
           path: '/setReminders',
           builder: (context, params) => const SetRemindersWidget(),
+        ),
+        FFRoute(
+          name: 'IndividualExercise',
+          path: '/individualExercise',
+          builder: (context, params) => IndividualExerciseWidget(
+            exerciseName: params.getParam('exerciseName', ParamType.String),
+            videoURL: params.getParam('videoURL', ParamType.String),
+            directions: params.getParam('directions', ParamType.String),
+          ),
+        ),
+        FFRoute(
+          name: 'IndividualExerciseCopy',
+          path: '/individualExerciseCopy',
+          builder: (context, params) => const IndividualExerciseCopyWidget(),
+        ),
+        FFRoute(
+          name: 'TimePeriodLine',
+          path: '/timePeriodLine',
+          builder: (context, params) => TimePeriodLineWidget(
+            numberDays: params.getParam('numberDays', ParamType.String),
+            timesPerDay: params.getParam('timesPerDay', ParamType.String),
+            daysPerWeek: params.getParam('daysPerWeek', ParamType.String),
+            numberSets: params.getParam('numberSets', ParamType.String),
+            numberReps: params.getParam('numberReps', ParamType.String),
+          ),
+        ),
+        FFRoute(
+          name: 'ExerciseResults',
+          path: '/exerciseResults',
+          builder: (context, params) => const ExerciseResultsWidget(),
+        ),
+        FFRoute(
+          name: 'ExerciseResultsHip',
+          path: '/exerciseResultsHip',
+          builder: (context, params) => const ExerciseResultsHipWidget(),
+        ),
+        FFRoute(
+          name: 'ExerciseResultsShoulder',
+          path: '/exerciseResultsShoulder',
+          builder: (context, params) => const ExerciseResultsShoulderWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
+      observers: [routeObserver],
     );
 
 extension NavParamExtensions on Map<String, String?> {

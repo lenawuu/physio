@@ -1,6 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'routine_item_model.dart';
 export 'routine_item_model.dart';
 
@@ -35,6 +36,8 @@ class _RoutineItemWidgetState extends State<RoutineItemWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       width: MediaQuery.sizeOf(context).width * 1.0,
       decoration: BoxDecoration(
@@ -84,15 +87,7 @@ class _RoutineItemWidgetState extends State<RoutineItemWidget> {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
-                            context.pushNamed(
-                              'IndividualExercise',
-                              queryParameters: {
-                                'exerciseName': serializeParam(
-                                  '',
-                                  ParamType.String,
-                                ),
-                              }.withoutNulls,
-                            );
+                            context.pushNamed('IndividualExercise');
                           },
                           child: Text(
                             'test Exercise Link',
@@ -124,19 +119,10 @@ class _RoutineItemWidgetState extends State<RoutineItemWidget> {
             ),
             Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
-              child: InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  context.pushNamed('IndividualExercise');
-                },
-                child: Icon(
-                  Icons.play_arrow,
-                  color: FlutterFlowTheme.of(context).accent1,
-                  size: 32.0,
-                ),
+              child: Icon(
+                Icons.play_arrow,
+                color: FlutterFlowTheme.of(context).accent1,
+                size: 32.0,
               ),
             ),
           ],
