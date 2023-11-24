@@ -30,12 +30,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => const SearchExerciseWidget(),
+      errorBuilder: (context, state) => const RoutineWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => const SearchExerciseWidget(),
+          builder: (context, _) => const RoutineWidget(),
         ),
         FFRoute(
           name: 'SearchExercise',
@@ -67,9 +67,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'ExerciseResultsHip',
-          path: '/exerciseResultsHip',
-          builder: (context, params) => const ExerciseResultsHipWidget(),
+          name: 'CategoryResults',
+          path: '/categoryResults',
+          builder: (context, params) => CategoryResultsWidget(
+            results: params.getParam<dynamic>('results', ParamType.JSON, true),
+            categoryType: params.getParam('categoryType', ParamType.String),
+          ),
+        ),
+        FFRoute(
+          name: 'PoseVideo',
+          path: '/poseVideo',
+          builder: (context, params) => const PoseVideoWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

@@ -7,5 +7,6 @@ export '/pages/time_period_sentence/time_period_sentence_widget.dart'
 export '/pages/set_reminders/set_reminders_widget.dart' show SetRemindersWidget;
 export '/pages/individual_exercise/individual_exercise_widget.dart'
     show IndividualExerciseWidget;
-export '/pages/exercise_results_hip/exercise_results_hip_widget.dart'
-    show ExerciseResultsHipWidget;
+export '/pages/category_results/category_results_widget.dart'
+    show CategoryResultsWidget;
+export '/pages/pose_video/pose_video_widget.dart' show PoseVideoWidget;

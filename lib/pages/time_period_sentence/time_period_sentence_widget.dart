@@ -310,7 +310,7 @@ class _TimePeriodSentenceWidgetState extends State<TimePeriodSentenceWidget> {
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(64.0, 0.0, 64.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(64.0, 16.0, 64.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () async {
                           setState(() {
@@ -326,19 +326,16 @@ class _TimePeriodSentenceWidgetState extends State<TimePeriodSentenceWidget> {
                                   widget.exercise,
                                   r'''$.Directions''',
                                 ).toString(),
-                                imageLink: getJsonField(
-                                  widget.exercise,
-                                  r'''$.ImageLink''',
-                                ).toString(),
                                 videoLink: getJsonField(
                                   widget.exercise,
                                   r'''$.VideoLink''',
                                 ).toString(),
+                                imageLink: '\$.ImageLink',
                               ),
                             ));
                           });
 
-                          context.pushNamed('Routine');
+                          context.pushNamed('SetReminders');
                         },
                         text: 'Looks good to me!',
                         options: FFButtonOptions(

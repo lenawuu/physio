@@ -5,26 +5,35 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'exercise_results_hip_model.dart';
-export 'exercise_results_hip_model.dart';
+import 'category_results_model.dart';
+export 'category_results_model.dart';
 
-class ExerciseResultsHipWidget extends StatefulWidget {
-  const ExerciseResultsHipWidget({super.key});
+class CategoryResultsWidget extends StatefulWidget {
+  const CategoryResultsWidget({
+    super.key,
+    required this.results,
+    required this.categoryType,
+  });
+
+  final List<dynamic>? results;
+  final String? categoryType;
 
   @override
-  _ExerciseResultsHipWidgetState createState() =>
-      _ExerciseResultsHipWidgetState();
+  _CategoryResultsWidgetState createState() => _CategoryResultsWidgetState();
 }
 
-class _ExerciseResultsHipWidgetState extends State<ExerciseResultsHipWidget> {
-  late ExerciseResultsHipModel _model;
+class _CategoryResultsWidgetState extends State<CategoryResultsWidget> {
+  late CategoryResultsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ExerciseResultsHipModel());
+    _model = createModel(context, () => CategoryResultsModel());
+
+    _model.textController ??= TextEditingController();
+    _model.textFieldFocusNode ??= FocusNode();
   }
 
   @override
@@ -75,7 +84,7 @@ class _ExerciseResultsHipWidgetState extends State<ExerciseResultsHipWidget> {
                               borderRadius: 20.0,
                               borderWidth: 1.0,
                               buttonSize: 40.0,
-                              fillColor: FlutterFlowTheme.of(context).accent1,
+                              fillColor: FlutterFlowTheme.of(context).primary,
                               icon: const Icon(
                                 Icons.arrow_back,
                                 color: Colors.white,
@@ -88,16 +97,36 @@ class _ExerciseResultsHipWidgetState extends State<ExerciseResultsHipWidget> {
                           ),
                         ].divide(const SizedBox(width: 8.0)),
                       ),
-                      Expanded(
-                        child: Align(
-                          alignment: const AlignmentDirectional(0.00, 0.00),
-                          child: Text(
-                            'Hip Exercises',
+                      Padding(
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
+                        child: RichText(
+                          textScaleFactor:
+                              MediaQuery.of(context).textScaleFactor,
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: widget.categoryType!,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Plus Jakarta Sans',
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      fontSize: 30.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                              ),
+                              const TextSpan(
+                                text: ' Exercises',
+                                style: TextStyle(),
+                              )
+                            ],
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
                                   fontFamily: 'Plus Jakarta Sans',
-                                  color: FlutterFlowTheme.of(context).accent1,
+                                  color: FlutterFlowTheme.of(context).primary,
                                   fontSize: 30.0,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -107,17 +136,83 @@ class _ExerciseResultsHipWidgetState extends State<ExerciseResultsHipWidget> {
                     ],
                   ),
                 ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 8.0),
+                        child: TextFormField(
+                          controller: _model.textController,
+                          focusNode: _model.textFieldFocusNode,
+                          onFieldSubmitted: (_) async {},
+                          autofocus: true,
+                          obscureText: false,
+                          decoration: InputDecoration(
+                            labelText: 'Search exercises...',
+                            labelStyle:
+                                FlutterFlowTheme.of(context).bodyLarge.override(
+                                      fontFamily: 'SF Pro',
+                                      useGoogleFonts: false,
+                                    ),
+                            hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).accent1,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).primary,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            errorBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).error,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            focusedErrorBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).error,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            suffixIcon: Icon(
+                              Icons.search_sharp,
+                              color: FlutterFlowTheme.of(context).accent1,
+                            ),
+                          ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'SF Pro',
+                                    useGoogleFonts: false,
+                                  ),
+                          validator: _model.textControllerValidator
+                              .asValidator(context),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 Expanded(
                   child: Builder(
                     builder: (context) {
-                      final hipResults = FFAppState().HipResults.toList();
+                      final results = widget.results!.toList();
                       return ListView.builder(
                         padding: EdgeInsets.zero,
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
-                        itemCount: hipResults.length,
-                        itemBuilder: (context, hipResultsIndex) {
-                          final hipResultsItem = hipResults[hipResultsIndex];
+                        itemCount: results.length,
+                        itemBuilder: (context, resultsIndex) {
+                          final resultsItem = results[resultsIndex];
                           return Align(
                             alignment: const AlignmentDirectional(0.00, 0.00),
                             child: Padding(
@@ -169,8 +264,8 @@ class _ExerciseResultsHipWidgetState extends State<ExerciseResultsHipWidget> {
                                                 BorderRadius.circular(8.0),
                                             child: Image.network(
                                               getJsonField(
-                                                hipResultsItem,
-                                                r'''$.ImageLink''',
+                                                resultsItem,
+                                                r'''$["Image Link"]''',
                                               ),
                                               width: 300.0,
                                               height: 200.0,
@@ -191,7 +286,7 @@ class _ExerciseResultsHipWidgetState extends State<ExerciseResultsHipWidget> {
                                             children: [
                                               AutoSizeText(
                                                 getJsonField(
-                                                  hipResultsItem,
+                                                  resultsItem,
                                                   r'''$.Title''',
                                                 )
                                                     .toString()
@@ -218,7 +313,7 @@ class _ExerciseResultsHipWidgetState extends State<ExerciseResultsHipWidget> {
                                                         0.0, 4.0, 0.0, 0.0),
                                                 child: Text(
                                                   getJsonField(
-                                                    hipResultsItem,
+                                                    resultsItem,
                                                     r'''$.Directions''',
                                                   )
                                                       .toString()
@@ -253,7 +348,7 @@ class _ExerciseResultsHipWidgetState extends State<ExerciseResultsHipWidget> {
                                             'IndividualExercise',
                                             queryParameters: {
                                               'exerciseJSON': serializeParam(
-                                                hipResultsItem,
+                                                resultsItem,
                                                 ParamType.JSON,
                                               ),
                                             }.withoutNulls,

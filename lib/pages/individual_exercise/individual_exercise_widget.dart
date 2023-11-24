@@ -65,313 +65,338 @@ class _IndividualExerciseWidgetState extends State<IndividualExerciseWidget> {
             top: true,
             child: Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Align(
-                        alignment: const AlignmentDirectional(-1.00, 0.00),
-                        child: FlutterFlowIconButton(
-                          borderColor: FlutterFlowTheme.of(context).primary,
-                          borderRadius: 20.0,
-                          borderWidth: 1.0,
-                          buttonSize: 40.0,
-                          fillColor: FlutterFlowTheme.of(context).accent1,
-                          icon: Icon(
-                            Icons.arrow_back,
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            size: 24.0,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Align(
+                          alignment: const AlignmentDirectional(-1.00, 0.00),
+                          child: FlutterFlowIconButton(
+                            borderColor: FlutterFlowTheme.of(context).primary,
+                            borderRadius: 20.0,
+                            borderWidth: 1.0,
+                            buttonSize: 40.0,
+                            fillColor: FlutterFlowTheme.of(context).primary,
+                            icon: const Icon(
+                              Icons.arrow_back,
+                              color: Colors.white,
+                              size: 24.0,
+                            ),
+                            onPressed: () async {
+                              context.safePop();
+                            },
                           ),
-                          onPressed: () async {
-                            context.pushNamed('SearchExercise');
-                          },
                         ),
-                      ),
-                      Align(
-                        alignment: const AlignmentDirectional(-1.00, 0.00),
-                        child: Text(
-                          getJsonField(
-                            widget.exerciseJSON,
-                            r'''$.Title''',
-                          ).toString(),
-                          textAlign: TextAlign.center,
-                          style: FlutterFlowTheme.of(context)
-                              .headlineLarge
-                              .override(
-                                fontFamily: 'SF Pro',
-                                color: FlutterFlowTheme.of(context).primary,
-                                fontSize: 24.0,
-                                fontWeight: FontWeight.bold,
-                                useGoogleFonts: false,
-                              ),
+                        Align(
+                          alignment: const AlignmentDirectional(-1.00, 0.00),
+                          child: Text(
+                            getJsonField(
+                              widget.exerciseJSON,
+                              r'''$.Title''',
+                            ).toString(),
+                            textAlign: TextAlign.center,
+                            style: FlutterFlowTheme.of(context)
+                                .headlineLarge
+                                .override(
+                                  fontFamily: 'SF Pro',
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  fontSize: 24.0,
+                                  fontWeight: FontWeight.bold,
+                                  useGoogleFonts: false,
+                                ),
+                          ),
                         ),
-                      ),
-                    ].divide(const SizedBox(width: 8.0)),
-                  ),
-                  FlutterFlowYoutubePlayer(
-                    url: getJsonField(
-                      widget.exerciseJSON,
-                      r'''$.VideoLink''',
+                      ].divide(const SizedBox(width: 8.0)),
                     ),
-                    autoPlay: false,
-                    looping: true,
-                    mute: false,
-                    showControls: true,
-                    showFullScreen: true,
-                    strictRelatedVideos: false,
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            16.0, 16.0, 0.0, 0.0),
-                        child: Text(
-                          'Targeted Muscle Groups',
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Plus Jakarta Sans',
-                                    color: FlutterFlowTheme.of(context).success,
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                        ),
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Align(
-                              alignment: const AlignmentDirectional(-1.00, 0.00),
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    2.0, 17.0, 0.0, 0.0),
-                                child: RichText(
-                                  textScaleFactor:
-                                      MediaQuery.of(context).textScaleFactor,
-                                  text: TextSpan(
-                                    children: [
-                                      TextSpan(
-                                        text: '',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Plus Jakarta Sans',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                      ),
-                                      const TextSpan(
-                                        text: '',
-                                        style: TextStyle(),
-                                      )
-                                    ],
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Plus Jakarta Sans',
-                                          fontSize: 12.0,
-                                        ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Align(
-                              alignment: const AlignmentDirectional(-1.00, 0.00),
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    5.0, 17.0, 0.0, 0.0),
-                                child: RichText(
-                                  textScaleFactor:
-                                      MediaQuery.of(context).textScaleFactor,
-                                  text: TextSpan(
-                                    children: [
-                                      TextSpan(
-                                        text: '',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Plus Jakarta Sans',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                      ),
-                                      const TextSpan(
-                                        text: '',
-                                        style: TextStyle(),
-                                      )
-                                    ],
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Plus Jakarta Sans',
-                                          fontSize: 12.0,
-                                        ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
-                    child: Text(
-                      getJsonField(
+                    FlutterFlowYoutubePlayer(
+                      url: getJsonField(
                         widget.exerciseJSON,
-                        r'''$.Directions''',
-                      ).toString(),
-                      textAlign: TextAlign.justify,
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Plus Jakarta Sans',
-                            color: const Color(0xFF969696),
-                          ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
-                    child: Text(
-                      'Related Conditions',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Plus Jakarta Sans',
-                            color: FlutterFlowTheme.of(context).success,
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                    ),
-                  ),
-                  Align(
-                    alignment: const AlignmentDirectional(-1.00, 0.00),
-                    child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 0.0, 0.0),
-                      child: RichText(
-                        textScaleFactor: MediaQuery.of(context).textScaleFactor,
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: '- ',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Plus Jakarta Sans',
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
-                            const TextSpan(
-                              text: ' - build different.',
-                              style: TextStyle(),
-                            )
-                          ],
-                          style: FlutterFlowTheme.of(context).bodyMedium,
-                        ),
+                        r'''$["Video Link"]''',
                       ),
+                      autoPlay: false,
+                      looping: true,
+                      mute: false,
+                      showControls: true,
+                      showFullScreen: true,
+                      strictRelatedVideos: false,
                     ),
-                  ),
-                  Align(
-                    alignment: const AlignmentDirectional(-1.00, 0.00),
-                    child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 0.0, 0.0),
-                      child: RichText(
-                        textScaleFactor: MediaQuery.of(context).textScaleFactor,
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: '- ',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Plus Jakarta Sans',
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
-                            const TextSpan(
-                              text: ' - build different.',
-                              style: TextStyle(),
-                            )
-                          ],
-                          style: FlutterFlowTheme.of(context).bodyMedium,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: const AlignmentDirectional(-1.00, 0.00),
-                    child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 0.0, 0.0),
-                      child: RichText(
-                        textScaleFactor: MediaQuery.of(context).textScaleFactor,
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: '- ',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Plus Jakarta Sans',
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
-                            const TextSpan(
-                              text: ' - build different.',
-                              style: TextStyle(),
-                            )
-                          ],
-                          style: FlutterFlowTheme.of(context).bodyMedium,
-                        ),
-                      ),
-                    ),
-                  ),
-                  FFButtonWidget(
-                    onPressed: () async {
-                      context.pushNamed(
-                        'TimePeriodSentence',
-                        queryParameters: {
-                          'exercise': serializeParam(
-                            widget.exerciseJSON,
-                            ParamType.JSON,
-                          ),
-                        }.withoutNulls,
-                      );
-                    },
-                    text: 'Add to routine',
-                    options: FFButtonOptions(
-                      height: 40.0,
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                      iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).primary,
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Plus Jakarta Sans',
-                                color: Colors.white,
+                    SingleChildScrollView(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Align(
+                                alignment: const AlignmentDirectional(-1.00, 0.00),
+                                child: Text(
+                                  'Directions',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Plus Jakarta Sans',
+                                        color: FlutterFlowTheme.of(context)
+                                            .success,
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                ),
                               ),
-                      elevation: 3.0,
-                      borderSide: const BorderSide(
-                        color: Colors.transparent,
-                        width: 1.0,
+                              Align(
+                                alignment: const AlignmentDirectional(-1.00, 0.00),
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      8.0, 4.0, 8.0, 0.0),
+                                  child: Text(
+                                    getJsonField(
+                                      widget.exerciseJSON,
+                                      r'''$.Directions''',
+                                    ).toString(),
+                                    textAlign: TextAlign.justify,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Plus Jakarta Sans',
+                                          color: const Color(0xFF969696),
+                                        ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Align(
+                                alignment: const AlignmentDirectional(-1.00, 0.00),
+                                child: Text(
+                                  'Targeted Muscle Group',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Plus Jakarta Sans',
+                                        color: FlutterFlowTheme.of(context)
+                                            .success,
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 4.0, 0.0, 0.0),
+                                child: Builder(
+                                  builder: (context) {
+                                    final exerciseJsonsMuscleGroup =
+                                        getJsonField(
+                                      widget.exerciseJSON,
+                                      r'''$["Muscle group"]''',
+                                    ).toList();
+                                    return ListView.builder(
+                                      padding: EdgeInsets.zero,
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.vertical,
+                                      itemCount:
+                                          exerciseJsonsMuscleGroup.length,
+                                      itemBuilder: (context,
+                                          exerciseJsonsMuscleGroupIndex) {
+                                        final exerciseJsonsMuscleGroupItem =
+                                            exerciseJsonsMuscleGroup[
+                                                exerciseJsonsMuscleGroupIndex];
+                                        return Align(
+                                          alignment:
+                                              const AlignmentDirectional(-1.00, 0.00),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    8.0, 0.0, 0.0, 0.0),
+                                            child: Text(
+                                              getJsonField(
+                                                exerciseJsonsMuscleGroupItem,
+                                                r'''$''',
+                                              ).toString(),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Align(
+                                alignment: const AlignmentDirectional(-1.00, 0.00),
+                                child: Text(
+                                  'Related Conditions',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Plus Jakarta Sans',
+                                        color: FlutterFlowTheme.of(context)
+                                            .success,
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 4.0, 0.0, 0.0),
+                                child: Builder(
+                                  builder: (context) {
+                                    final exerciseJsonsRelatedConditions =
+                                        getJsonField(
+                                      widget.exerciseJSON,
+                                      r'''$["Related Conditions"]''',
+                                    ).toList();
+                                    return ListView.builder(
+                                      padding: EdgeInsets.zero,
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.vertical,
+                                      itemCount:
+                                          exerciseJsonsRelatedConditions.length,
+                                      itemBuilder: (context,
+                                          exerciseJsonsRelatedConditionsIndex) {
+                                        final exerciseJsonsRelatedConditionsItem =
+                                            exerciseJsonsRelatedConditions[
+                                                exerciseJsonsRelatedConditionsIndex];
+                                        return Align(
+                                          alignment:
+                                              const AlignmentDirectional(-1.00, 0.00),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    8.0, 0.0, 0.0, 0.0),
+                                            child: Text(
+                                              getJsonField(
+                                                exerciseJsonsRelatedConditionsItem,
+                                                r'''$''',
+                                              ).toString(),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Align(
+                                alignment: const AlignmentDirectional(-1.00, 0.00),
+                                child: Text(
+                                  'Muscles Involved',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Plus Jakarta Sans',
+                                        color: FlutterFlowTheme.of(context)
+                                            .success,
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 4.0, 0.0, 0.0),
+                                child: Builder(
+                                  builder: (context) {
+                                    final excerciseJsonsMusclesInvolved =
+                                        getJsonField(
+                                      widget.exerciseJSON,
+                                      r'''$["Muscles Involved"]''',
+                                    ).toList();
+                                    return ListView.builder(
+                                      padding: EdgeInsets.zero,
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.vertical,
+                                      itemCount:
+                                          excerciseJsonsMusclesInvolved.length,
+                                      itemBuilder: (context,
+                                          excerciseJsonsMusclesInvolvedIndex) {
+                                        final excerciseJsonsMusclesInvolvedItem =
+                                            excerciseJsonsMusclesInvolved[
+                                                excerciseJsonsMusclesInvolvedIndex];
+                                        return Align(
+                                          alignment:
+                                              const AlignmentDirectional(-1.00, 0.00),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    8.0, 0.0, 0.0, 0.0),
+                                            child: Text(
+                                              getJsonField(
+                                                excerciseJsonsMusclesInvolvedItem,
+                                                r'''$''',
+                                              ).toString(),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
-                      borderRadius: BorderRadius.circular(8.0),
                     ),
-                  ),
-                ].divide(const SizedBox(height: 16.0)),
+                    FFButtonWidget(
+                      onPressed: () async {
+                        context.pushNamed(
+                          'TimePeriodSentence',
+                          queryParameters: {
+                            'exercise': serializeParam(
+                              widget.exerciseJSON,
+                              ParamType.JSON,
+                            ),
+                          }.withoutNulls,
+                        );
+                      },
+                      text: 'Add to routine',
+                      options: FFButtonOptions(
+                        height: 40.0,
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            24.0, 0.0, 24.0, 0.0),
+                        iconPadding:
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: FlutterFlowTheme.of(context).primary,
+                        textStyle:
+                            FlutterFlowTheme.of(context).titleSmall.override(
+                                  fontFamily: 'Plus Jakarta Sans',
+                                  color: Colors.white,
+                                ),
+                        elevation: 3.0,
+                        borderSide: const BorderSide(
+                          color: Colors.transparent,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                    ),
+                  ].divide(const SizedBox(height: 16.0)),
+                ),
               ),
             ),
           ),

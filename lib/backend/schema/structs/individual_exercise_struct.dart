@@ -11,18 +11,18 @@ class IndividualExerciseStruct extends BaseStruct {
     String? directions,
     List<String>? musclesInvolved,
     List<String>? relatedConditions,
-    String? imageLink,
     String? url,
     List<String>? muscleGroup,
     String? videoLink,
+    String? imageLink,
   })  : _title = title,
         _directions = directions,
         _musclesInvolved = musclesInvolved,
         _relatedConditions = relatedConditions,
-        _imageLink = imageLink,
         _url = url,
         _muscleGroup = muscleGroup,
-        _videoLink = videoLink;
+        _videoLink = videoLink,
+        _imageLink = imageLink;
 
   // "Title" field.
   String? _title;
@@ -52,12 +52,6 @@ class IndividualExerciseStruct extends BaseStruct {
       updateFn(_relatedConditions ??= []);
   bool hasRelatedConditions() => _relatedConditions != null;
 
-  // "imageLink" field.
-  String? _imageLink;
-  String get imageLink => _imageLink ?? '';
-  set imageLink(String? val) => _imageLink = val;
-  bool hasImageLink() => _imageLink != null;
-
   // "URL" field.
   String? _url;
   String get url => _url ?? '';
@@ -78,16 +72,22 @@ class IndividualExerciseStruct extends BaseStruct {
   set videoLink(String? val) => _videoLink = val;
   bool hasVideoLink() => _videoLink != null;
 
+  // "ImageLink" field.
+  String? _imageLink;
+  String get imageLink => _imageLink ?? '';
+  set imageLink(String? val) => _imageLink = val;
+  bool hasImageLink() => _imageLink != null;
+
   static IndividualExerciseStruct fromMap(Map<String, dynamic> data) =>
       IndividualExerciseStruct(
         title: data['Title'] as String?,
         directions: data['Directions'] as String?,
         musclesInvolved: getDataList(data['MusclesInvolved']),
         relatedConditions: getDataList(data['RelatedConditions']),
-        imageLink: data['imageLink'] as String?,
         url: data['URL'] as String?,
         muscleGroup: getDataList(data['MuscleGroup']),
         videoLink: data['VideoLink'] as String?,
+        imageLink: data['ImageLink'] as String?,
       );
 
   static IndividualExerciseStruct? maybeFromMap(dynamic data) =>
@@ -100,10 +100,10 @@ class IndividualExerciseStruct extends BaseStruct {
         'Directions': _directions,
         'MusclesInvolved': _musclesInvolved,
         'RelatedConditions': _relatedConditions,
-        'imageLink': _imageLink,
         'URL': _url,
         'MuscleGroup': _muscleGroup,
         'VideoLink': _videoLink,
+        'ImageLink': _imageLink,
       }.withoutNulls;
 
   @override
@@ -126,10 +126,6 @@ class IndividualExerciseStruct extends BaseStruct {
           ParamType.String,
           true,
         ),
-        'imageLink': serializeParam(
-          _imageLink,
-          ParamType.String,
-        ),
         'URL': serializeParam(
           _url,
           ParamType.String,
@@ -141,6 +137,10 @@ class IndividualExerciseStruct extends BaseStruct {
         ),
         'VideoLink': serializeParam(
           _videoLink,
+          ParamType.String,
+        ),
+        'ImageLink': serializeParam(
+          _imageLink,
           ParamType.String,
         ),
       }.withoutNulls;
@@ -168,11 +168,6 @@ class IndividualExerciseStruct extends BaseStruct {
           ParamType.String,
           true,
         ),
-        imageLink: deserializeParam(
-          data['imageLink'],
-          ParamType.String,
-          false,
-        ),
         url: deserializeParam(
           data['URL'],
           ParamType.String,
@@ -185,6 +180,11 @@ class IndividualExerciseStruct extends BaseStruct {
         ),
         videoLink: deserializeParam(
           data['VideoLink'],
+          ParamType.String,
+          false,
+        ),
+        imageLink: deserializeParam(
+          data['ImageLink'],
           ParamType.String,
           false,
         ),
@@ -201,10 +201,10 @@ class IndividualExerciseStruct extends BaseStruct {
         directions == other.directions &&
         listEquality.equals(musclesInvolved, other.musclesInvolved) &&
         listEquality.equals(relatedConditions, other.relatedConditions) &&
-        imageLink == other.imageLink &&
         url == other.url &&
         listEquality.equals(muscleGroup, other.muscleGroup) &&
-        videoLink == other.videoLink;
+        videoLink == other.videoLink &&
+        imageLink == other.imageLink;
   }
 
   @override
@@ -213,24 +213,24 @@ class IndividualExerciseStruct extends BaseStruct {
         directions,
         musclesInvolved,
         relatedConditions,
-        imageLink,
         url,
         muscleGroup,
-        videoLink
+        videoLink,
+        imageLink
       ]);
 }
 
 IndividualExerciseStruct createIndividualExerciseStruct({
   String? title,
   String? directions,
-  String? imageLink,
   String? url,
   String? videoLink,
+  String? imageLink,
 }) =>
     IndividualExerciseStruct(
       title: title,
       directions: directions,
-      imageLink: imageLink,
       url: url,
       videoLink: videoLink,
+      imageLink: imageLink,
     );

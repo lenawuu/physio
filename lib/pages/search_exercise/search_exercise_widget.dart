@@ -1,3 +1,4 @@
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -64,58 +65,91 @@ class _SearchExerciseWidgetState extends State<SearchExerciseWidget> {
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  TextFormField(
-                    controller: _model.textController,
-                    focusNode: _model.textFieldFocusNode,
-                    autofocus: true,
-                    obscureText: false,
-                    decoration: InputDecoration(
-                      labelText: 'Search exercises...',
-                      labelStyle:
-                          FlutterFlowTheme.of(context).bodyLarge.override(
-                                fontFamily: 'SF Pro',
-                                useGoogleFonts: false,
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Align(
+                        alignment: const AlignmentDirectional(-1.00, 0.00),
+                        child: FlutterFlowIconButton(
+                          borderColor: Colors.transparent,
+                          borderRadius: 20.0,
+                          borderWidth: 1.0,
+                          buttonSize: 40.0,
+                          fillColor: FlutterFlowTheme.of(context).primary,
+                          icon: const Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
+                            size: 24.0,
+                          ),
+                          onPressed: () async {
+                            context.safePop();
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              8.0, 0.0, 0.0, 0.0),
+                          child: TextFormField(
+                            controller: _model.textController,
+                            focusNode: _model.textFieldFocusNode,
+                            autofocus: true,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              labelText: 'Search exercises...',
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .bodyLarge
+                                  .override(
+                                    fontFamily: 'SF Pro',
+                                    useGoogleFonts: false,
+                                  ),
+                              hintStyle:
+                                  FlutterFlowTheme.of(context).labelMedium,
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).accent1,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
                               ),
-                      hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).accent1,
-                          width: 2.0,
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              errorBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedErrorBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 2.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              suffixIcon: Icon(
+                                Icons.search_sharp,
+                                color: FlutterFlowTheme.of(context).accent1,
+                              ),
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'SF Pro',
+                                  useGoogleFonts: false,
+                                ),
+                            validator: _model.textControllerValidator
+                                .asValidator(context),
+                          ),
                         ),
-                        borderRadius: BorderRadius.circular(8.0),
                       ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).primary,
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      errorBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      focusedErrorBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      suffixIcon: Icon(
-                        Icons.search_sharp,
-                        color: FlutterFlowTheme.of(context).accent1,
-                      ),
-                    ),
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'SF Pro',
-                          useGoogleFonts: false,
-                        ),
-                    validator:
-                        _model.textControllerValidator.asValidator(context),
+                    ],
                   ),
                   Align(
                     alignment: const AlignmentDirectional(-1.00, 0.00),
@@ -233,8 +267,21 @@ class _SearchExerciseWidgetState extends State<SearchExerciseWidget> {
                           ),
                         ),
                         FFButtonWidget(
-                          onPressed: () {
-                            print('Button pressed ...');
+                          onPressed: () async {
+                            context.pushNamed(
+                              'CategoryResults',
+                              queryParameters: {
+                                'results': serializeParam(
+                                  FFAppState().ShoulderResults,
+                                  ParamType.JSON,
+                                  true,
+                                ),
+                                'categoryType': serializeParam(
+                                  'Shoulder',
+                                  ParamType.String,
+                                ),
+                              }.withoutNulls,
+                            );
                           },
                           text: 'Shoulder',
                           options: FFButtonOptions(
@@ -315,7 +362,20 @@ class _SearchExerciseWidgetState extends State<SearchExerciseWidget> {
                         ),
                         FFButtonWidget(
                           onPressed: () async {
-                            context.pushNamed('ExerciseResultsHip');
+                            context.pushNamed(
+                              'CategoryResults',
+                              queryParameters: {
+                                'results': serializeParam(
+                                  FFAppState().HipResults,
+                                  ParamType.JSON,
+                                  true,
+                                ),
+                                'categoryType': serializeParam(
+                                  'Hip',
+                                  ParamType.String,
+                                ),
+                              }.withoutNulls,
+                            );
                           },
                           text: 'Hip',
                           options: FFButtonOptions(

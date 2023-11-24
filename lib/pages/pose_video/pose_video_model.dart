@@ -1,9 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'exercise_results_hip_widget.dart' show ExerciseResultsHipWidget;
+import 'pose_video_widget.dart' show PoseVideoWidget;
 import 'package:flutter/material.dart';
 
-class ExerciseResultsHipModel
-    extends FlutterFlowModel<ExerciseResultsHipWidget> {
+class PoseVideoModel extends FlutterFlowModel<PoseVideoWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
