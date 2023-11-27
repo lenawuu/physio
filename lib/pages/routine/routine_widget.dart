@@ -1,6 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -70,10 +71,14 @@ class _RoutineWidgetState extends State<RoutineWidget> {
                         children: [
                           Align(
                             alignment: const AlignmentDirectional(-1.00, 0.00),
-                            child: Text(
-                              'Good morning, Lena.',
-                              style:
-                                  FlutterFlowTheme.of(context).headlineMedium,
+                            child: Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 24.0, 0.0, 0.0),
+                              child: Text(
+                                'Good morning, Lena.',
+                                style:
+                                    FlutterFlowTheme.of(context).headlineMedium,
+                              ),
                             ),
                           ),
                           Row(
@@ -93,9 +98,15 @@ class _RoutineWidgetState extends State<RoutineWidget> {
                             alignment: const AlignmentDirectional(-1.00, -1.00),
                             child: Text(
                               valueOrDefault<String>(
-                                FFAppState().userRoutine.isEmpty
-                                    ? 'Let\'s create your routine!'
-                                    : 'Ready to begin your routine?',
+                                () {
+                                  if (FFAppState().userRoutine.isEmpty) {
+                                    return 'Let\'s create your routine!';
+                                  } else if (_model.exerciseIsDone) {
+                                    return 'Great job today!';
+                                  } else {
+                                    return 'Ready to begin your routine?';
+                                  }
+                                }(),
                                 'Let\'s begin!',
                               ),
                               style: FlutterFlowTheme.of(context)
@@ -120,7 +131,7 @@ class _RoutineWidgetState extends State<RoutineWidget> {
                         },
                         child: Icon(
                           Icons.play_circle,
-                          color: FlutterFlowTheme.of(context).accent1,
+                          color: FlutterFlowTheme.of(context).primary,
                           size: 48.0,
                         ),
                       ),
@@ -141,8 +152,10 @@ class _RoutineWidgetState extends State<RoutineWidget> {
                           return Container(
                             width: MediaQuery.sizeOf(context).width * 1.0,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
+                              color: _model.exerciseIsDone
+                                  ? FlutterFlowTheme.of(context).primary
+                                  : FlutterFlowTheme.of(context)
+                                      .primaryBackground,
                               boxShadow: const [
                                 BoxShadow(
                                   blurRadius: 3.0,
@@ -164,7 +177,8 @@ class _RoutineWidgetState extends State<RoutineWidget> {
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(6.0),
                                       child: Image.network(
-                                        routineItem.exercise.imageLink,
+                                        functions.stringToImagePath(
+                                            routineItem.exercise.imageLinkStr)!,
                                         width: 70.0,
                                         height: 70.0,
                                         fit: BoxFit.cover,
@@ -195,9 +209,12 @@ class _RoutineWidgetState extends State<RoutineWidget> {
                                                         .titleMedium
                                                         .override(
                                                           fontFamily: 'SF Pro',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
+                                                          color: _model
+                                                                  .exerciseIsDone
+                                                              ? Colors.white
+                                                              : FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primaryText,
                                                           fontWeight:
                                                               FontWeight.w600,
                                                           useGoogleFonts: false,
@@ -209,27 +226,71 @@ class _RoutineWidgetState extends State<RoutineWidget> {
                                               children: [
                                                 Text(
                                                   routineItem.sets.toString(),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium,
+                                                  style:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Plus Jakarta Sans',
+                                                            color: _model
+                                                                    .exerciseIsDone
+                                                                ? Colors.white
+                                                                : FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryText,
+                                                          ),
                                                 ),
                                                 Text(
                                                   ' sets of ',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium,
+                                                  style:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Plus Jakarta Sans',
+                                                            color: _model
+                                                                    .exerciseIsDone
+                                                                ? Colors.white
+                                                                : FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryText,
+                                                          ),
                                                 ),
                                                 Text(
                                                   routineItem.reps.toString(),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium,
+                                                  style:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Plus Jakarta Sans',
+                                                            color: _model
+                                                                    .exerciseIsDone
+                                                                ? Colors.white
+                                                                : FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryText,
+                                                          ),
                                                 ),
                                                 Text(
                                                   ' reps',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium,
+                                                  style:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Plus Jakarta Sans',
+                                                            color: _model
+                                                                    .exerciseIsDone
+                                                                ? Colors.white
+                                                                : FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryText,
+                                                          ),
                                                 ),
                                               ],
                                             ),
@@ -241,11 +302,24 @@ class _RoutineWidgetState extends State<RoutineWidget> {
                                   Column(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      Icon(
-                                        Icons.play_arrow,
-                                        color: FlutterFlowTheme.of(context)
-                                            .accent1,
-                                        size: 32.0,
+                                      InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          setState(() {
+                                            _model.exerciseIsDone = true;
+                                          });
+                                        },
+                                        child: Icon(
+                                          Icons.play_arrow,
+                                          color: _model.exerciseIsDone
+                                              ? Colors.white
+                                              : FlutterFlowTheme.of(context)
+                                                  .primary,
+                                          size: 32.0,
+                                        ),
                                       ),
                                       Padding(
                                         padding: const EdgeInsetsDirectional.fromSTEB(
@@ -264,8 +338,10 @@ class _RoutineWidgetState extends State<RoutineWidget> {
                                           },
                                           child: Icon(
                                             Icons.delete,
-                                            color: FlutterFlowTheme.of(context)
-                                                .accent1,
+                                            color: _model.exerciseIsDone
+                                                ? Colors.white
+                                                : FlutterFlowTheme.of(context)
+                                                    .primary,
                                             size: 24.0,
                                           ),
                                         ),
@@ -300,7 +376,7 @@ class _RoutineWidgetState extends State<RoutineWidget> {
                           const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
                           const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).accent1,
+                      color: FlutterFlowTheme.of(context).primary,
                       textStyle: FlutterFlowTheme.of(context)
                           .titleSmall
                           .override(
@@ -318,38 +394,42 @@ class _RoutineWidgetState extends State<RoutineWidget> {
                       borderRadius: BorderRadius.circular(20.0),
                     ),
                   ),
-                  FFButtonWidget(
-                    onPressed: () async {
-                      context.pushNamed(
-                        'SetReminders',
-                        extra: <String, dynamic>{
-                          kTransitionInfoKey: const TransitionInfo(
-                            hasTransition: true,
-                            transitionType: PageTransitionType.fade,
-                            duration: Duration(milliseconds: 0),
-                          ),
-                        },
-                      );
-                    },
-                    text: 'Set Reminder Time',
-                    options: FFButtonOptions(
-                      height: 40.0,
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                      iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).primaryBackground,
-                      textStyle:
-                          FlutterFlowTheme.of(context).labelLarge.override(
-                                fontFamily: 'SF Pro',
-                                useGoogleFonts: false,
-                              ),
-                      elevation: 3.0,
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).secondaryText,
-                        width: 1.0,
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 50.0),
+                    child: FFButtonWidget(
+                      onPressed: () async {
+                        context.pushNamed(
+                          'SetReminders',
+                          extra: <String, dynamic>{
+                            kTransitionInfoKey: const TransitionInfo(
+                              hasTransition: true,
+                              transitionType: PageTransitionType.fade,
+                              duration: Duration(milliseconds: 0),
+                            ),
+                          },
+                        );
+                      },
+                      text: 'Set Reminder Time',
+                      options: FFButtonOptions(
+                        height: 40.0,
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            24.0, 0.0, 24.0, 0.0),
+                        iconPadding:
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: FlutterFlowTheme.of(context).primaryBackground,
+                        textStyle:
+                            FlutterFlowTheme.of(context).labelLarge.override(
+                                  fontFamily: 'SF Pro',
+                                  useGoogleFonts: false,
+                                ),
+                        elevation: 3.0,
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context).primary,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
-                      borderRadius: BorderRadius.circular(20.0),
                     ),
                   ),
                 ].divide(const SizedBox(height: 24.0)),

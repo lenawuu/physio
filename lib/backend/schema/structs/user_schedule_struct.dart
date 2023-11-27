@@ -1,22 +1,27 @@
 // ignore_for_file: unnecessary_getters_setters
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
-class UserScheduleStruct extends BaseStruct {
+class UserScheduleStruct extends FFFirebaseStruct {
   UserScheduleStruct({
     int? numDays,
     int? timesPerDay,
     int? daysPerWeek,
     int? numSets,
     int? numReps,
+    FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _numDays = numDays,
         _timesPerDay = timesPerDay,
         _daysPerWeek = daysPerWeek,
         _numSets = numSets,
-        _numReps = numReps;
+        _numReps = numReps,
+        super(firestoreUtilData);
 
   // "numDays" field.
   int? _numDays;
@@ -150,6 +155,10 @@ UserScheduleStruct createUserScheduleStruct({
   int? daysPerWeek,
   int? numSets,
   int? numReps,
+  Map<String, dynamic> fieldValues = const {},
+  bool clearUnsetFields = true,
+  bool create = false,
+  bool delete = false,
 }) =>
     UserScheduleStruct(
       numDays: numDays,
@@ -157,4 +166,72 @@ UserScheduleStruct createUserScheduleStruct({
       daysPerWeek: daysPerWeek,
       numSets: numSets,
       numReps: numReps,
+      firestoreUtilData: FirestoreUtilData(
+        clearUnsetFields: clearUnsetFields,
+        create: create,
+        delete: delete,
+        fieldValues: fieldValues,
+      ),
     );
+
+UserScheduleStruct? updateUserScheduleStruct(
+  UserScheduleStruct? userSchedule, {
+  bool clearUnsetFields = true,
+  bool create = false,
+}) =>
+    userSchedule
+      ?..firestoreUtilData = FirestoreUtilData(
+        clearUnsetFields: clearUnsetFields,
+        create: create,
+      );
+
+void addUserScheduleStructData(
+  Map<String, dynamic> firestoreData,
+  UserScheduleStruct? userSchedule,
+  String fieldName, [
+  bool forFieldValue = false,
+]) {
+  firestoreData.remove(fieldName);
+  if (userSchedule == null) {
+    return;
+  }
+  if (userSchedule.firestoreUtilData.delete) {
+    firestoreData[fieldName] = FieldValue.delete();
+    return;
+  }
+  final clearFields =
+      !forFieldValue && userSchedule.firestoreUtilData.clearUnsetFields;
+  if (clearFields) {
+    firestoreData[fieldName] = <String, dynamic>{};
+  }
+  final userScheduleData =
+      getUserScheduleFirestoreData(userSchedule, forFieldValue);
+  final nestedData =
+      userScheduleData.map((k, v) => MapEntry('$fieldName.$k', v));
+
+  final mergeFields = userSchedule.firestoreUtilData.create || clearFields;
+  firestoreData
+      .addAll(mergeFields ? mergeNestedFields(nestedData) : nestedData);
+}
+
+Map<String, dynamic> getUserScheduleFirestoreData(
+  UserScheduleStruct? userSchedule, [
+  bool forFieldValue = false,
+]) {
+  if (userSchedule == null) {
+    return {};
+  }
+  final firestoreData = mapToFirestore(userSchedule.toMap());
+
+  // Add any Firestore field values
+  userSchedule.firestoreUtilData.fieldValues
+      .forEach((k, v) => firestoreData[k] = v);
+
+  return forFieldValue ? mergeNestedFields(firestoreData) : firestoreData;
+}
+
+List<Map<String, dynamic>> getUserScheduleListFirestoreData(
+  List<UserScheduleStruct>? userSchedules,
+) =>
+    userSchedules?.map((e) => getUserScheduleFirestoreData(e, true)).toList() ??
+    [];

@@ -182,7 +182,6 @@ class _SearchExerciseWidgetState extends State<SearchExerciseWidget> {
                         mainAxisSpacing: 8.0,
                         childAspectRatio: 1.5,
                       ),
-                      shrinkWrap: true,
                       scrollDirection: Axis.vertical,
                       children: [
                         FFButtonWidget(

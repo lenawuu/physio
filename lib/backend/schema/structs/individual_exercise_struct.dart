@@ -1,11 +1,14 @@
 // ignore_for_file: unnecessary_getters_setters
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
-class IndividualExerciseStruct extends BaseStruct {
+class IndividualExerciseStruct extends FFFirebaseStruct {
   IndividualExerciseStruct({
     String? title,
     String? directions,
@@ -15,6 +18,10 @@ class IndividualExerciseStruct extends BaseStruct {
     List<String>? muscleGroup,
     String? videoLink,
     String? imageLink,
+    String? imageLinkStr,
+    bool? isDone,
+    Color? myColor,
+    FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _title = title,
         _directions = directions,
         _musclesInvolved = musclesInvolved,
@@ -22,7 +29,11 @@ class IndividualExerciseStruct extends BaseStruct {
         _url = url,
         _muscleGroup = muscleGroup,
         _videoLink = videoLink,
-        _imageLink = imageLink;
+        _imageLink = imageLink,
+        _imageLinkStr = imageLinkStr,
+        _isDone = isDone,
+        _myColor = myColor,
+        super(firestoreUtilData);
 
   // "Title" field.
   String? _title;
@@ -78,6 +89,24 @@ class IndividualExerciseStruct extends BaseStruct {
   set imageLink(String? val) => _imageLink = val;
   bool hasImageLink() => _imageLink != null;
 
+  // "ImageLinkStr" field.
+  String? _imageLinkStr;
+  String get imageLinkStr => _imageLinkStr ?? '';
+  set imageLinkStr(String? val) => _imageLinkStr = val;
+  bool hasImageLinkStr() => _imageLinkStr != null;
+
+  // "isDone" field.
+  bool? _isDone;
+  bool get isDone => _isDone ?? false;
+  set isDone(bool? val) => _isDone = val;
+  bool hasIsDone() => _isDone != null;
+
+  // "myColor" field.
+  Color? _myColor;
+  Color? get myColor => _myColor;
+  set myColor(Color? val) => _myColor = val;
+  bool hasMyColor() => _myColor != null;
+
   static IndividualExerciseStruct fromMap(Map<String, dynamic> data) =>
       IndividualExerciseStruct(
         title: data['Title'] as String?,
@@ -88,6 +117,9 @@ class IndividualExerciseStruct extends BaseStruct {
         muscleGroup: getDataList(data['MuscleGroup']),
         videoLink: data['VideoLink'] as String?,
         imageLink: data['ImageLink'] as String?,
+        imageLinkStr: data['ImageLinkStr'] as String?,
+        isDone: data['isDone'] as bool?,
+        myColor: getSchemaColor(data['myColor']),
       );
 
   static IndividualExerciseStruct? maybeFromMap(dynamic data) =>
@@ -104,6 +136,9 @@ class IndividualExerciseStruct extends BaseStruct {
         'MuscleGroup': _muscleGroup,
         'VideoLink': _videoLink,
         'ImageLink': _imageLink,
+        'ImageLinkStr': _imageLinkStr,
+        'isDone': _isDone,
+        'myColor': _myColor,
       }.withoutNulls;
 
   @override
@@ -142,6 +177,18 @@ class IndividualExerciseStruct extends BaseStruct {
         'ImageLink': serializeParam(
           _imageLink,
           ParamType.String,
+        ),
+        'ImageLinkStr': serializeParam(
+          _imageLinkStr,
+          ParamType.String,
+        ),
+        'isDone': serializeParam(
+          _isDone,
+          ParamType.bool,
+        ),
+        'myColor': serializeParam(
+          _myColor,
+          ParamType.Color,
         ),
       }.withoutNulls;
 
@@ -188,6 +235,21 @@ class IndividualExerciseStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        imageLinkStr: deserializeParam(
+          data['ImageLinkStr'],
+          ParamType.String,
+          false,
+        ),
+        isDone: deserializeParam(
+          data['isDone'],
+          ParamType.bool,
+          false,
+        ),
+        myColor: deserializeParam(
+          data['myColor'],
+          ParamType.Color,
+          false,
+        ),
       );
 
   @override
@@ -204,7 +266,10 @@ class IndividualExerciseStruct extends BaseStruct {
         url == other.url &&
         listEquality.equals(muscleGroup, other.muscleGroup) &&
         videoLink == other.videoLink &&
-        imageLink == other.imageLink;
+        imageLink == other.imageLink &&
+        imageLinkStr == other.imageLinkStr &&
+        isDone == other.isDone &&
+        myColor == other.myColor;
   }
 
   @override
@@ -216,7 +281,10 @@ class IndividualExerciseStruct extends BaseStruct {
         url,
         muscleGroup,
         videoLink,
-        imageLink
+        imageLink,
+        imageLinkStr,
+        isDone,
+        myColor
       ]);
 }
 
@@ -226,6 +294,13 @@ IndividualExerciseStruct createIndividualExerciseStruct({
   String? url,
   String? videoLink,
   String? imageLink,
+  String? imageLinkStr,
+  bool? isDone,
+  Color? myColor,
+  Map<String, dynamic> fieldValues = const {},
+  bool clearUnsetFields = true,
+  bool create = false,
+  bool delete = false,
 }) =>
     IndividualExerciseStruct(
       title: title,
@@ -233,4 +308,78 @@ IndividualExerciseStruct createIndividualExerciseStruct({
       url: url,
       videoLink: videoLink,
       imageLink: imageLink,
+      imageLinkStr: imageLinkStr,
+      isDone: isDone,
+      myColor: myColor,
+      firestoreUtilData: FirestoreUtilData(
+        clearUnsetFields: clearUnsetFields,
+        create: create,
+        delete: delete,
+        fieldValues: fieldValues,
+      ),
     );
+
+IndividualExerciseStruct? updateIndividualExerciseStruct(
+  IndividualExerciseStruct? individualExercise, {
+  bool clearUnsetFields = true,
+  bool create = false,
+}) =>
+    individualExercise
+      ?..firestoreUtilData = FirestoreUtilData(
+        clearUnsetFields: clearUnsetFields,
+        create: create,
+      );
+
+void addIndividualExerciseStructData(
+  Map<String, dynamic> firestoreData,
+  IndividualExerciseStruct? individualExercise,
+  String fieldName, [
+  bool forFieldValue = false,
+]) {
+  firestoreData.remove(fieldName);
+  if (individualExercise == null) {
+    return;
+  }
+  if (individualExercise.firestoreUtilData.delete) {
+    firestoreData[fieldName] = FieldValue.delete();
+    return;
+  }
+  final clearFields =
+      !forFieldValue && individualExercise.firestoreUtilData.clearUnsetFields;
+  if (clearFields) {
+    firestoreData[fieldName] = <String, dynamic>{};
+  }
+  final individualExerciseData =
+      getIndividualExerciseFirestoreData(individualExercise, forFieldValue);
+  final nestedData =
+      individualExerciseData.map((k, v) => MapEntry('$fieldName.$k', v));
+
+  final mergeFields =
+      individualExercise.firestoreUtilData.create || clearFields;
+  firestoreData
+      .addAll(mergeFields ? mergeNestedFields(nestedData) : nestedData);
+}
+
+Map<String, dynamic> getIndividualExerciseFirestoreData(
+  IndividualExerciseStruct? individualExercise, [
+  bool forFieldValue = false,
+]) {
+  if (individualExercise == null) {
+    return {};
+  }
+  final firestoreData = mapToFirestore(individualExercise.toMap());
+
+  // Add any Firestore field values
+  individualExercise.firestoreUtilData.fieldValues
+      .forEach((k, v) => firestoreData[k] = v);
+
+  return forFieldValue ? mergeNestedFields(firestoreData) : firestoreData;
+}
+
+List<Map<String, dynamic>> getIndividualExerciseListFirestoreData(
+  List<IndividualExerciseStruct>? individualExercises,
+) =>
+    individualExercises
+        ?.map((e) => getIndividualExerciseFirestoreData(e, true))
+        .toList() ??
+    [];

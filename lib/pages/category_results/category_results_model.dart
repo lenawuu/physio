@@ -1,3 +1,4 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'category_results_widget.dart' show CategoryResultsWidget;
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ class CategoryResultsModel extends FlutterFlowModel<CategoryResultsWidget> {
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
+  List<HipExercisesRecord> simpleSearchResults = [];
 
   /// Initialization and disposal methods.
 

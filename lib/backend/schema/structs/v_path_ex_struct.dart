@@ -1,11 +1,14 @@
 // ignore_for_file: unnecessary_getters_setters
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
-class VPathExStruct extends BaseStruct {
+class VPathExStruct extends FFFirebaseStruct {
   VPathExStruct({
     String? title,
     String? directions,
@@ -15,6 +18,7 @@ class VPathExStruct extends BaseStruct {
     String? url,
     List<String>? muscleGroup,
     String? videoLink,
+    FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _title = title,
         _directions = directions,
         _musclesInvolved = musclesInvolved,
@@ -22,7 +26,8 @@ class VPathExStruct extends BaseStruct {
         _imageLink = imageLink,
         _url = url,
         _muscleGroup = muscleGroup,
-        _videoLink = videoLink;
+        _videoLink = videoLink,
+        super(firestoreUtilData);
 
   // "Title" field.
   String? _title;
@@ -222,6 +227,10 @@ VPathExStruct createVPathExStruct({
   String? imageLink,
   String? url,
   String? videoLink,
+  Map<String, dynamic> fieldValues = const {},
+  bool clearUnsetFields = true,
+  bool create = false,
+  bool delete = false,
 }) =>
     VPathExStruct(
       title: title,
@@ -229,4 +238,68 @@ VPathExStruct createVPathExStruct({
       imageLink: imageLink,
       url: url,
       videoLink: videoLink,
+      firestoreUtilData: FirestoreUtilData(
+        clearUnsetFields: clearUnsetFields,
+        create: create,
+        delete: delete,
+        fieldValues: fieldValues,
+      ),
     );
+
+VPathExStruct? updateVPathExStruct(
+  VPathExStruct? vPathEx, {
+  bool clearUnsetFields = true,
+  bool create = false,
+}) =>
+    vPathEx
+      ?..firestoreUtilData = FirestoreUtilData(
+        clearUnsetFields: clearUnsetFields,
+        create: create,
+      );
+
+void addVPathExStructData(
+  Map<String, dynamic> firestoreData,
+  VPathExStruct? vPathEx,
+  String fieldName, [
+  bool forFieldValue = false,
+]) {
+  firestoreData.remove(fieldName);
+  if (vPathEx == null) {
+    return;
+  }
+  if (vPathEx.firestoreUtilData.delete) {
+    firestoreData[fieldName] = FieldValue.delete();
+    return;
+  }
+  final clearFields =
+      !forFieldValue && vPathEx.firestoreUtilData.clearUnsetFields;
+  if (clearFields) {
+    firestoreData[fieldName] = <String, dynamic>{};
+  }
+  final vPathExData = getVPathExFirestoreData(vPathEx, forFieldValue);
+  final nestedData = vPathExData.map((k, v) => MapEntry('$fieldName.$k', v));
+
+  final mergeFields = vPathEx.firestoreUtilData.create || clearFields;
+  firestoreData
+      .addAll(mergeFields ? mergeNestedFields(nestedData) : nestedData);
+}
+
+Map<String, dynamic> getVPathExFirestoreData(
+  VPathExStruct? vPathEx, [
+  bool forFieldValue = false,
+]) {
+  if (vPathEx == null) {
+    return {};
+  }
+  final firestoreData = mapToFirestore(vPathEx.toMap());
+
+  // Add any Firestore field values
+  vPathEx.firestoreUtilData.fieldValues.forEach((k, v) => firestoreData[k] = v);
+
+  return forFieldValue ? mergeNestedFields(firestoreData) : firestoreData;
+}
+
+List<Map<String, dynamic>> getVPathExListFirestoreData(
+  List<VPathExStruct>? vPathExs,
+) =>
+    vPathExs?.map((e) => getVPathExFirestoreData(e, true)).toList() ?? [];

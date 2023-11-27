@@ -3,6 +3,10 @@ import 'routine_widget.dart' show RoutineWidget;
 import 'package:flutter/material.dart';
 
 class RoutineModel extends FlutterFlowModel<RoutineWidget> {
+  ///  Local state fields for this page.
+
+  bool exerciseIsDone = false;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

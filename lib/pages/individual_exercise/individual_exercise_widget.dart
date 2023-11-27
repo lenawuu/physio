@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/flutter_flow_youtube_player.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -12,7 +13,7 @@ export 'individual_exercise_model.dart';
 class IndividualExerciseWidget extends StatefulWidget {
   const IndividualExerciseWidget({
     super.key,
-    required this.exerciseJSON,
+    this.exerciseJSON,
   });
 
   final dynamic exerciseJSON;
@@ -64,52 +65,79 @@ class _IndividualExerciseWidgetState extends State<IndividualExerciseWidget> {
           body: SafeArea(
             top: true,
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 24.0),
               child: SingleChildScrollView(
+                primary: false,
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Align(
-                          alignment: const AlignmentDirectional(-1.00, 0.00),
-                          child: FlutterFlowIconButton(
-                            borderColor: FlutterFlowTheme.of(context).primary,
-                            borderRadius: 20.0,
-                            borderWidth: 1.0,
-                            buttonSize: 40.0,
-                            fillColor: FlutterFlowTheme.of(context).primary,
-                            icon: const Icon(
-                              Icons.arrow_back,
-                              color: Colors.white,
-                              size: 24.0,
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Align(
+                            alignment: const AlignmentDirectional(-1.00, 0.00),
+                            child: FlutterFlowIconButton(
+                              borderColor: FlutterFlowTheme.of(context).primary,
+                              borderRadius: 20.0,
+                              borderWidth: 1.0,
+                              buttonSize: 40.0,
+                              fillColor: FlutterFlowTheme.of(context).primary,
+                              icon: const Icon(
+                                Icons.arrow_back,
+                                color: Colors.white,
+                                size: 24.0,
+                              ),
+                              onPressed: () async {
+                                context.safePop();
+                              },
                             ),
-                            onPressed: () async {
-                              context.safePop();
-                            },
                           ),
-                        ),
-                        Align(
-                          alignment: const AlignmentDirectional(-1.00, 0.00),
-                          child: Text(
-                            getJsonField(
-                              widget.exerciseJSON,
-                              r'''$.Title''',
-                            ).toString(),
-                            textAlign: TextAlign.center,
-                            style: FlutterFlowTheme.of(context)
-                                .headlineLarge
-                                .override(
-                                  fontFamily: 'SF Pro',
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  fontSize: 24.0,
-                                  fontWeight: FontWeight.bold,
-                                  useGoogleFonts: false,
+                          Expanded(
+                            child: Wrap(
+                              spacing: 0.0,
+                              runSpacing: 0.0,
+                              alignment: WrapAlignment.start,
+                              crossAxisAlignment: WrapCrossAlignment.start,
+                              direction: Axis.horizontal,
+                              runAlignment: WrapAlignment.start,
+                              verticalDirection: VerticalDirection.down,
+                              clipBehavior: Clip.none,
+                              children: [
+                                Container(
+                                  width: 290.0,
+                                  height: 50.0,
+                                  decoration: const BoxDecoration(),
+                                  child: Align(
+                                    alignment:
+                                        const AlignmentDirectional(-1.00, 0.00),
+                                    child: AutoSizeText(
+                                      getJsonField(
+                                        widget.exerciseJSON,
+                                        r'''$.Title''',
+                                      ).toString(),
+                                      textAlign: TextAlign.start,
+                                      style: FlutterFlowTheme.of(context)
+                                          .headlineLarge
+                                          .override(
+                                            fontFamily: 'SF Pro',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            fontSize: 24.0,
+                                            fontWeight: FontWeight.bold,
+                                            useGoogleFonts: false,
+                                          ),
+                                      minFontSize: 5.0,
+                                    ),
+                                  ),
                                 ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ].divide(const SizedBox(width: 8.0)),
+                        ].divide(const SizedBox(width: 8.0)),
+                      ),
                     ),
                     FlutterFlowYoutubePlayer(
                       url: getJsonField(
@@ -214,10 +242,8 @@ class _IndividualExerciseWidgetState extends State<IndividualExerciseWidget> {
                                                 const EdgeInsetsDirectional.fromSTEB(
                                                     8.0, 0.0, 0.0, 0.0),
                                             child: Text(
-                                              getJsonField(
-                                                exerciseJsonsMuscleGroupItem,
-                                                r'''$''',
-                                              ).toString(),
+                                              exerciseJsonsMuscleGroupItem
+                                                  .toString(),
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium,
@@ -278,10 +304,8 @@ class _IndividualExerciseWidgetState extends State<IndividualExerciseWidget> {
                                                 const EdgeInsetsDirectional.fromSTEB(
                                                     8.0, 0.0, 0.0, 0.0),
                                             child: Text(
-                                              getJsonField(
-                                                exerciseJsonsRelatedConditionsItem,
-                                                r'''$''',
-                                              ).toString(),
+                                              exerciseJsonsRelatedConditionsItem
+                                                  .toString(),
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium,
@@ -342,10 +366,8 @@ class _IndividualExerciseWidgetState extends State<IndividualExerciseWidget> {
                                                 const EdgeInsetsDirectional.fromSTEB(
                                                     8.0, 0.0, 0.0, 0.0),
                                             child: Text(
-                                              getJsonField(
-                                                excerciseJsonsMusclesInvolvedItem,
-                                                r'''$''',
-                                              ).toString(),
+                                              excerciseJsonsMusclesInvolvedItem
+                                                  .toString(),
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium,
@@ -362,37 +384,41 @@ class _IndividualExerciseWidgetState extends State<IndividualExerciseWidget> {
                         ],
                       ),
                     ),
-                    FFButtonWidget(
-                      onPressed: () async {
-                        context.pushNamed(
-                          'TimePeriodSentence',
-                          queryParameters: {
-                            'exercise': serializeParam(
-                              widget.exerciseJSON,
-                              ParamType.JSON,
-                            ),
-                          }.withoutNulls,
-                        );
-                      },
-                      text: 'Add to routine',
-                      options: FFButtonOptions(
-                        height: 40.0,
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            24.0, 0.0, 24.0, 0.0),
-                        iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Plus Jakarta Sans',
-                                  color: Colors.white,
-                                ),
-                        elevation: 3.0,
-                        borderSide: const BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 50.0),
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          context.pushNamed(
+                            'TimePeriodSentence',
+                            queryParameters: {
+                              'exercise': serializeParam(
+                                widget.exerciseJSON,
+                                ParamType.JSON,
+                              ),
+                            }.withoutNulls,
+                          );
+                        },
+                        text: 'Add to routine',
+                        options: FFButtonOptions(
+                          height: 40.0,
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              24.0, 0.0, 24.0, 0.0),
+                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          color: FlutterFlowTheme.of(context).primary,
+                          textStyle:
+                              FlutterFlowTheme.of(context).titleSmall.override(
+                                    fontFamily: 'Plus Jakarta Sans',
+                                    color: Colors.white,
+                                  ),
+                          elevation: 3.0,
+                          borderSide: const BorderSide(
+                            color: Colors.transparent,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(30.0),
                         ),
-                        borderRadius: BorderRadius.circular(30.0),
                       ),
                     ),
                   ].divide(const SizedBox(height: 16.0)),

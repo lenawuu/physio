@@ -166,7 +166,7 @@ class _SetRemindersWidgetState extends State<SetRemindersWidget> {
                                 .override(
                                   fontFamily: 'SF Pro',
                                   color: FlutterFlowTheme.of(context).primary,
-                                  fontSize: 64.0,
+                                  fontSize: 50.0,
                                   fontWeight: FontWeight.normal,
                                   useGoogleFonts: false,
                                 ),
@@ -175,7 +175,7 @@ class _SetRemindersWidgetState extends State<SetRemindersWidget> {
                               color: FlutterFlowTheme.of(context).primary,
                               width: 2.0,
                             ),
-                            borderRadius: BorderRadius.circular(8.0),
+                            borderRadius: BorderRadius.circular(60.0),
                           ),
                         ),
                         Padding(

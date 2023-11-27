@@ -330,12 +330,21 @@ class _TimePeriodSentenceWidgetState extends State<TimePeriodSentenceWidget> {
                                   widget.exercise,
                                   r'''$.VideoLink''',
                                 ).toString(),
-                                imageLink: '\$.ImageLink',
+                                imageLink: getJsonField(
+                                  widget.exercise,
+                                  r'''$["Image Link"]''',
+                                ),
+                                imageLinkStr: getJsonField(
+                                  widget.exercise,
+                                  r'''$["Image Link"]''',
+                                ).toString(),
+                                myColor: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
                               ),
                             ));
                           });
 
-                          context.pushNamed('SetReminders');
+                          context.pushNamed('Routine');
                         },
                         text: 'Looks good to me!',
                         options: FFButtonOptions(
