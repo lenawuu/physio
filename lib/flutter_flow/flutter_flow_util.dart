@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:from_css_color/from_css_color.dart';
@@ -14,13 +15,18 @@ import '../main.dart';
 export 'lat_lng.dart';
 export 'place.dart';
 export 'uploaded_file.dart';
+export '../app_state.dart';
 export 'flutter_flow_model.dart';
 export 'dart:math' show min, max;
 export 'dart:typed_data' show Uint8List;
 export 'dart:convert' show jsonEncode, jsonDecode;
 export 'package:intl/intl.dart';
+export 'package:cloud_firestore/cloud_firestore.dart'
+    show DocumentReference, FirebaseFirestore;
 export 'package:page_transition/page_transition.dart';
 export 'nav/nav.dart';
+
+final RouteObserver<ModalRoute> routeObserver = RouteObserver<PageRoute>();
 
 T valueOrDefault<T>(T? value, T defaultValue) =>
     (value is String && value.isEmpty) || value == null ? defaultValue : value;
@@ -33,6 +39,151 @@ String dateTimeFormat(String format, DateTime? dateTime, {String? locale}) {
     return timeago.format(dateTime, locale: locale, allowFromNow: true);
   }
   return DateFormat(format, locale).format(dateTime);
+}
+
+Theme wrapInMaterialDatePickerTheme(
+  BuildContext context,
+  Widget child, {
+  required Color headerBackgroundColor,
+  required Color headerForegroundColor,
+  required TextStyle headerTextStyle,
+  required Color pickerBackgroundColor,
+  required Color pickerForegroundColor,
+  required Color selectedDateTimeBackgroundColor,
+  required Color selectedDateTimeForegroundColor,
+  required Color actionButtonForegroundColor,
+  required double iconSize,
+}) {
+  final baseTheme = Theme.of(context);
+  final dateTimeMaterialStateForegroundColor =
+      MaterialStateProperty.resolveWith((states) {
+    if (states.contains(MaterialState.disabled)) {
+      return pickerForegroundColor.withOpacity(0.60);
+    }
+    if (states.contains(MaterialState.selected)) {
+      return selectedDateTimeForegroundColor;
+    }
+    if (states.isEmpty) {
+      return pickerForegroundColor;
+    }
+    return null;
+  });
+
+  final dateTimeMaterialStateBackgroundColor =
+      MaterialStateProperty.resolveWith((states) {
+    if (states.contains(MaterialState.selected)) {
+      return selectedDateTimeBackgroundColor;
+    }
+    return null;
+  });
+
+  return Theme(
+    data: baseTheme.copyWith(
+      colorScheme: baseTheme.colorScheme.copyWith(
+        onSurface: pickerForegroundColor,
+      ),
+      disabledColor: pickerForegroundColor.withOpacity(0.3),
+      textTheme: baseTheme.textTheme.copyWith(
+        headlineSmall: headerTextStyle,
+        headlineMedium: headerTextStyle,
+      ),
+      iconTheme: baseTheme.iconTheme.copyWith(
+        size: iconSize,
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: ButtonStyle(
+            foregroundColor: MaterialStatePropertyAll(
+              actionButtonForegroundColor,
+            ),
+            overlayColor: MaterialStateProperty.resolveWith((states) {
+              if (states.contains(MaterialState.hovered)) {
+                return actionButtonForegroundColor.withOpacity(0.04);
+              }
+              if (states.contains(MaterialState.focused) ||
+                  states.contains(MaterialState.pressed)) {
+                return actionButtonForegroundColor.withOpacity(0.12);
+              }
+              return null;
+            })),
+      ),
+      datePickerTheme: DatePickerThemeData(
+        backgroundColor: pickerBackgroundColor,
+        headerBackgroundColor: headerBackgroundColor,
+        headerForegroundColor: headerForegroundColor,
+        weekdayStyle: baseTheme.textTheme.labelMedium!.copyWith(
+          color: pickerForegroundColor,
+        ),
+        dayBackgroundColor: dateTimeMaterialStateBackgroundColor,
+        todayBackgroundColor: dateTimeMaterialStateBackgroundColor,
+        yearBackgroundColor: dateTimeMaterialStateBackgroundColor,
+        dayForegroundColor: dateTimeMaterialStateForegroundColor,
+        todayForegroundColor: dateTimeMaterialStateForegroundColor,
+        yearForegroundColor: dateTimeMaterialStateForegroundColor,
+      ),
+    ),
+    child: child,
+  );
+}
+
+Theme wrapInMaterialTimePickerTheme(
+  BuildContext context,
+  Widget child, {
+  required Color headerBackgroundColor,
+  required Color headerForegroundColor,
+  required TextStyle headerTextStyle,
+  required Color pickerBackgroundColor,
+  required Color pickerForegroundColor,
+  required Color selectedDateTimeBackgroundColor,
+  required Color selectedDateTimeForegroundColor,
+  required Color actionButtonForegroundColor,
+  required double iconSize,
+}) {
+  final baseTheme = Theme.of(context);
+  return Theme(
+    data: baseTheme.copyWith(
+      iconTheme: baseTheme.iconTheme.copyWith(
+        size: iconSize,
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: ButtonStyle(
+            foregroundColor: MaterialStatePropertyAll(
+              actionButtonForegroundColor,
+            ),
+            overlayColor: MaterialStateProperty.resolveWith((states) {
+              if (states.contains(MaterialState.hovered)) {
+                return actionButtonForegroundColor.withOpacity(0.04);
+              }
+              if (states.contains(MaterialState.focused) ||
+                  states.contains(MaterialState.pressed)) {
+                return actionButtonForegroundColor.withOpacity(0.12);
+              }
+              return null;
+            })),
+      ),
+      timePickerTheme: baseTheme.timePickerTheme.copyWith(
+        backgroundColor: pickerBackgroundColor,
+        hourMinuteTextColor: pickerForegroundColor,
+        dialHandColor: selectedDateTimeBackgroundColor,
+        dialTextColor: MaterialStateColor.resolveWith((states) =>
+            states.contains(MaterialState.selected)
+                ? selectedDateTimeForegroundColor
+                : pickerForegroundColor),
+        dayPeriodBorderSide: BorderSide(
+          color: pickerForegroundColor,
+        ),
+        dayPeriodTextColor: MaterialStateColor.resolveWith((states) =>
+            states.contains(MaterialState.selected)
+                ? selectedDateTimeForegroundColor
+                : pickerForegroundColor),
+        dayPeriodColor: MaterialStateColor.resolveWith((states) =>
+            states.contains(MaterialState.selected)
+                ? selectedDateTimeBackgroundColor
+                : Colors.transparent),
+        entryModeIconColor: pickerForegroundColor,
+      ),
+    ),
+    child: child,
+  );
 }
 
 Future launchURL(String url) async {
@@ -218,6 +369,10 @@ extension IterableExt<T> on Iterable<T> {
       .map((index, value) => MapEntry(index, func(index, value)))
       .values
       .toList();
+}
+
+extension StringDocRef on String {
+  DocumentReference get ref => FirebaseFirestore.instance.doc(this);
 }
 
 void setAppLanguage(BuildContext context, String language) =>

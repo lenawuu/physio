@@ -3,6 +3,10 @@ import 'set_reminders_widget.dart' show SetRemindersWidget;
 import 'package:flutter/material.dart';
 
 class SetRemindersModel extends FlutterFlowModel<SetRemindersWidget> {
+  ///  State fields for stateful widgets in this page.
+
+  DateTime? datePicked;
+
   /// Initialization and disposal methods.
 
   @override

@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "985870369370",
+    "firebase_url": "https://ptapp-2a172-default-rtdb.firebaseio.com",
+    "project_id": "ptapp-2a172",
+    "storage_bucket": "ptapp-2a172.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:985870369370:android:79372c1fc2224621c04e63",
+        "android_client_info": {
+          "package_name": "com.mycompany.ptapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6TyrtK9l09q0yLmKFpgG0PLrfhC3zj8c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

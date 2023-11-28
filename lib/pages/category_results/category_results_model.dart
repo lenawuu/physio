@@ -1,8 +1,13 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'add_exercise_widget.dart' show AddExerciseWidget;
+import 'category_results_widget.dart' show CategoryResultsWidget;
 import 'package:flutter/material.dart';
 
-class AddExerciseModel extends FlutterFlowModel<AddExerciseWidget> {
+class CategoryResultsModel extends FlutterFlowModel<CategoryResultsWidget> {
+  ///  Local state fields for this page.
+
+  bool isShowFullList = true;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -10,6 +15,7 @@ class AddExerciseModel extends FlutterFlowModel<AddExerciseWidget> {
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
+  List<HipExercisesRecord> simpleSearchResults = [];
 
   /// Initialization and disposal methods.
 

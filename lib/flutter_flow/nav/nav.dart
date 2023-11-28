@@ -29,17 +29,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => const AddExerciseWidget(),
+      errorBuilder: (context, state) => const RoutineWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => const AddExerciseWidget(),
+          builder: (context, _) => const RoutineWidget(),
         ),
         FFRoute(
-          name: 'AddExercise',
-          path: '/addExercise',
-          builder: (context, params) => const AddExerciseWidget(),
+          name: 'SearchExercise',
+          path: '/searchExercise',
+          builder: (context, params) => const SearchExerciseWidget(),
         ),
         FFRoute(
           name: 'Routine',
@@ -47,29 +47,39 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const RoutineWidget(),
         ),
         FFRoute(
-          name: 'IndividualExercise',
-          path: '/individualExercise',
-          builder: (context, params) => IndividualExerciseWidget(
-            exerciseName: params.getParam('exerciseName', ParamType.String),
-          ),
-        ),
-        FFRoute(
-          name: 'TimePeriod',
-          path: '/timePeriod',
-          builder: (context, params) => TimePeriodWidget(
-            numberDays: params.getParam('numberDays', ParamType.String),
-            timesPerDay: params.getParam('timesPerDay', ParamType.String),
-            daysPerWeek: params.getParam('daysPerWeek', ParamType.String),
-            numberSets: params.getParam('numberSets', ParamType.String),
-            numberReps: params.getParam('numberReps', ParamType.String),
+          name: 'TimePeriodSentence',
+          path: '/timePeriodSentence',
+          builder: (context, params) => TimePeriodSentenceWidget(
+            exercise: params.getParam('exercise', ParamType.JSON),
           ),
         ),
         FFRoute(
           name: 'SetReminders',
           path: '/setReminders',
           builder: (context, params) => const SetRemindersWidget(),
+        ),
+        FFRoute(
+          name: 'IndividualExercise',
+          path: '/individualExercise',
+          builder: (context, params) => IndividualExerciseWidget(
+            exerciseJSON: params.getParam('exerciseJSON', ParamType.JSON),
+          ),
+        ),
+        FFRoute(
+          name: 'CategoryResults',
+          path: '/categoryResults',
+          builder: (context, params) => CategoryResultsWidget(
+            results: params.getParam<dynamic>('results', ParamType.JSON, true),
+            categoryType: params.getParam('categoryType', ParamType.String),
+          ),
+        ),
+        FFRoute(
+          name: 'PoseVideo',
+          path: '/poseVideo',
+          builder: (context, params) => const PoseVideoWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
+      observers: [routeObserver],
     );
 
 extension NavParamExtensions on Map<String, String?> {
@@ -139,6 +149,7 @@ class FFParameters {
     String paramName,
     ParamType type, [
     bool isList = false,
+    List<String>? collectionNamePath,
   ]) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
@@ -152,11 +163,8 @@ class FFParameters {
       return param;
     }
     // Return serialized value.
-    return deserializeParam<T>(
-      param,
-      type,
-      isList,
-    );
+    return deserializeParam<T>(param, type, isList,
+        collectionNamePath: collectionNamePath);
   }
 }
 
