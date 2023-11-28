@@ -242,6 +242,7 @@ class _CategoryResultsWidgetState extends State<CategoryResultsWidget> {
                             return ListView.builder(
                               padding: EdgeInsets.zero,
                               shrinkWrap: true,
+                              primary: false,
                               scrollDirection: Axis.vertical,
                               itemCount: results.length,
                               itemBuilder: (context, resultsIndex) {
@@ -438,7 +439,8 @@ class _CategoryResultsWidgetState extends State<CategoryResultsWidget> {
                             return ListView.builder(
                               padding: EdgeInsets.zero,
                               shrinkWrap: true,
-                              scrollDirection: Axis.vertical,
+                              primary: false,
+                              // scrollDirection: Axis.vertical,
                               itemCount: searchResults.length,
                               itemBuilder: (context, searchResultsIndex) {
                                 final searchResultsItem =
