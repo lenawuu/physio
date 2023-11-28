@@ -75,7 +75,7 @@ class _RoutineWidgetState extends State<RoutineWidget> {
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 24.0, 0.0, 0.0),
                               child: Text(
-                                'Good morning, Lena.',
+                                'Good morning.',
                                 style:
                                     FlutterFlowTheme.of(context).headlineMedium,
                               ),

@@ -5,7 +5,7 @@
 
 
     <application
-        android:label="PT-App"
+        android:label="Physio"
         tools:replace="android:label"
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true">
