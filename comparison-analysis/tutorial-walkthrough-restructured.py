@@ -62,14 +62,14 @@ class PoseAnalyzer:
     def __init__(self, json_file):
         self.json_file = json_file
         self.baseline_poses = []
-    """
+    
     def load_baseline_poses(self, frame_indices):
         with open(self.json_file, 'r') as file:
             data = json.load(file)
             for index in frame_indices:
                 self.baseline_poses.append((data[index]['landmarks'], data[index]['connections']))
     
-    These 2 methods replace the manual calculations for stage frame indices""" 
+    #These 2 methods replace the manual calculations for stage frame indices
     def calculate_frame_indices(self, total_stages):
         with open(self.json_file, 'r') as file:
             data = json.load(file)
